@@ -1,0 +1,1 @@
+npx fitfont-generate ..\Segment16C_Bold.ttf 100 \"▌1234567890:_-."

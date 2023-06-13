@@ -1,0 +1,115 @@
+<svg>
+  <!-- <text id="step_bg" class="center-text">_____</text> -->
+  <use href="#fitfont" id="step_bg">
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+  </use>
+  <!-- step formats -->
+  <use href="#fitfont" id="step_fg_5">
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+  </use>
+  <use href="#fitfont" id="step_fg_4">
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+  </use>
+  <use href="#fitfont" id="step_fg_3">
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+  </use>
+  <use href="#fitfont" id="step_fg_2">
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+  </use>
+  <use href="#fitfont" id="step_fg_1">
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+  </use>
+  <use href="#fitfont" id="step_fg_0">
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="lead_sp"/>
+  </use>
+  <!-- heartrate formats -->
+  <use href="#fitfont" id="heart_bg">
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+  </use>
+  <use href="#fitfont" id="heart_fg_3">
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+  </use>
+  <use href="#fitfont" id="heart_fg_2">
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+  </use>
+  <!-- battery formats -->
+  <use href="#fitfont" id="batt_bg">
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+  </use>
+  <use href="#fitfont" id="batt_fg_hi">
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+  </use>
+</svg>

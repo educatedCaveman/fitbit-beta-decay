@@ -1,0 +1,52 @@
+/* GENERAL */
+#stat_fg {
+  fill: gold;
+  /* text-anchor: middle; */
+  /* opacity: 0.10; */
+}
+
+#lead_sp {
+  fill: gold;
+  /* text-anchor: middle; */
+  opacity: 0.0;
+}
+
+/* STEPS */
+#step_bg {
+  x: 50%;
+  y: 50%;
+  fill: gold;
+  /* text-anchor: middle; */
+  opacity: 0.15;
+}
+/* positions */
+#step_fg_5 {x: 50%; y: 50%;}
+#step_fg_4 {x: 50%; y: 50%;}
+#step_fg_3 {x: 50%; y: 50%;}
+#step_fg_2 {x: 50%; y: 50%;}
+#step_fg_1 {x: 50%; y: 50%;}
+#step_fg_0 {x: 50%; y: 50%;}
+
+/* HEART */
+#heart_bg {
+  x: 50%;
+  y: 85%;
+  fill: gold;
+  /* text-anchor: middle; */
+  opacity: 0.15;
+}
+/* positions */
+#heart_fg_3 {x: 50%; y: 85%;}
+#heart_fg_2 {x: 50%; y: 85%;}
+
+/* BATTERY */
+#batt_bg {
+  x: 50%;
+  y: 20%;
+  fill: gold;
+  /* text-anchor: middle; */
+  opacity: 0.15;
+}
+
+#batt_fg_hi {x: 50%; y: 20%;}
+#batt_fg_lo {x: 50%; y: 20%;}
