@@ -15,12 +15,11 @@ import { charger } from "power";
 const heartBG = new FitFont({id:'heart_bg', font:'Segment16C_100', halign: 'middle', valign: 'middle'})
 heartBG.text = "•.•.•.";
 // the background for the step counter
-const stepBG = new FitFont({id:'step_bg', font:'Segment16C_100', halign: 'middle', valign: 'middle'})
-stepBG.text = "•.•.•.•.•.";
-// the background for the battery stus
-// maybe have a stus message, too?
+const stepBG = new FitFont({id:'step_bg', font:'Segment16C_120', halign: 'middle', valign: 'middle'})
+// stepBG.text = "•.•.•.•.•.";
+stepBG.text = "•.•.•.•.•";
 const battBG = new FitFont({id:'batt_bg', font:'Segment16C_50', halign: 'middle', valign: 'middle'})
-battBG.text = "•.•.•.•.•.•.•.•.•.•.•.";
+battBG.text = "•.•.•.•.";
 
 
 // Battery level and status
@@ -28,9 +27,9 @@ clock.granularity = "seconds";
 // clock.granularity = "minutes";
 clock.ontick = (evt) => {
     const level = battery.chargeLevel;
-    const battFG = new FitFont({id:'batt_fg_hi', font:'Segment16C_50', halign: 'middle', valign: 'middle'})
+    const battFG = new FitFont({id:'batt_fg', font:'Segment16C_50', halign: 'middle', valign: 'middle'})
     const percent = String("000" + level).slice(-3)
-    battFG.text = String("BATT:••" + percent + "%")
+    battFG.text = String(percent + "%")
 }
 
 
@@ -47,7 +46,7 @@ if (BodyPresenceSensor) {
                 console.log("Current heart rate: " + hr);
                 // const hr_len = String(hr).length;
                 let hrFG;
-                hrFG = new FitFont({id:'heart_fg_3', font:'Segment16C_100', halign: 'middle', valign: 'middle'})
+                hrFG = new FitFont({id:'heart_fg', font:'Segment16C_100', halign: 'middle', valign: 'middle'})
                 hrFG.text = String("000" + hr).slice(-3)
             });
 
@@ -59,7 +58,7 @@ if (BodyPresenceSensor) {
             // stop the monitor when the watch isn't on the body, and turn back on when it is.
             if (!body.present) {
                 hrm.stop();
-                let hrFG = new FitFont({id:'heart_fg_3', font:'Segment16C_100', halign: 'middle', valign: 'middle'})
+                let hrFG = new FitFont({id:'heart_fg', font:'Segment16C_100', halign: 'middle', valign: 'middle'})
                 hrFG.text = String("---")
             } else {
                 hrm.start();
@@ -83,33 +82,6 @@ if (BodyPresenceSensor) {
 
 if (today && appbit.permissions.granted("access_activity")) {
     const steps = today.adjusted.steps
-    const step_len = String(steps).length;
-    console.log(step_len)
-    let stepFG;
-    switch (step_len) {
-        case 5:
-            stepFG = new FitFont({id:'step_fg_5', font:'Segment16C_100', halign: 'middle', valign: 'middle'})
-            break;
-        case 4:
-            stepFG = new FitFont({id:'step_fg_4', font:'Segment16C_100', halign: 'middle', valign: 'middle'})
-            break;
-        case 3:
-            stepFG = new FitFont({id:'step_fg_3', font:'Segment16C_100', halign: 'middle', valign: 'middle'})
-            break;
-        case 2:
-            stepFG = new FitFont({id:'step_fg_2', font:'Segment16C_100', halign: 'middle', valign: 'middle'})
-            break;
-        case 0:
-            stepFG = new FitFont({id:'step_fg_1', font:'Segment16C_100', halign: 'middle', valign: 'middle'})
-            break;
-        case 1:
-            stepFG = new FitFont({id:'step_fg_0', font:'Segment16C_100', halign: 'middle', valign: 'middle'})
-            break;
-        //todo: make a message here?
-        default:
-            steps = "00000"
-            break;
-    }
-    stepFG.text = String("·····" + steps).slice(-5)    
-    console.log(stepFG.text)
+    const stepFG = new FitFont({id:'step_fg', font:'Segment16C_120', halign: 'middle', valign: 'middle'})
+    stepFG.text = String("00000" + steps).slice(-5)
 }
