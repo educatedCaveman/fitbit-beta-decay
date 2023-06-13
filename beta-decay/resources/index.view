@@ -47,10 +47,26 @@
     <use href="#fitfont-char"/>
     <use href="#fitfont-char"/>
   </use>
-  <use href="#fitfont" id="batt_fg">
+  <use href="#fitfont" id="batt_fg_100">
     <use href="#fitfont-char" id="stat_fg"/>
     <use href="#fitfont-char" id="stat_fg"/>
     <use href="#fitfont-char" id="stat_fg"/>
     <use href="#fitfont-char" id="stat_fg"/>
   </use>
+  <use href="#fitfont" id="batt_fg_10">
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+  </use>
+  <use href="#fitfont" id="batt_fg_1">
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="lead_sp"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+    <use href="#fitfont-char" id="stat_fg"/>
+  </use>
+  <!-- <g id="bat_ref">
+    <rect width="112" height="38" x="112" y="45" fill="black" />
+  </g> -->
+  
 </svg>

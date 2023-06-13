@@ -1,23 +1,20 @@
 /* GENERAL */
 #stat_fg {
   fill: goldenrod;
-  /* text-anchor: middle; */
-  /* opacity: 0.10; */
 }
 
 #lead_sp {
-  fill: goldenrod;
-  /* text-anchor: middle; */
-  opacity: 0.0;
+  fill: black;
+  /* opacity: 0.0; */
 }
 
 /* STEPS */
 #step_bg {
   x: 50%;
   y: 50%;
-  fill: goldenrod;
-  /* text-anchor: middle; */
-  opacity: 0.15;
+  /* fill: goldenrod;
+  opacity: 0.15; */
+  fill: #2b2b2b;
 }
 /* positions */
 #step_fg {
@@ -30,7 +27,6 @@
   x: 50%;
   y: 85%;
   fill: goldenrod;
-  /* text-anchor: middle; */
   opacity: 0.15;
 }
 /* positions */
@@ -43,12 +39,10 @@
 #batt_bg {
   x: 50%;
   y: 20%;
-  fill: goldenrod;
-  opacity: 0.15;
+  fill: #2b2b2b;
+  /* fill: black; */
 }
 
-#batt_fg {
-  x: 50%; 
-  y: 20%; 
-  fill: goldenrod;
-}
+#batt_fg_100 {x: 50%; y: 20%; fill: goldenrod;}
+#batt_fg_10 {x: 50%; y: 20%; fill: goldenrod;}
+#batt_fg_1 {x: 50%; y: 20%; fill: goldenrod;}

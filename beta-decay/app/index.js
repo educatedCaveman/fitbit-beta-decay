@@ -18,18 +18,39 @@ heartBG.text = "•.•.•.";
 const stepBG = new FitFont({id:'step_bg', font:'Segment16C_120', halign: 'middle', valign: 'middle'})
 // stepBG.text = "•.•.•.•.•.";
 stepBG.text = "•.•.•.•.•";
-const battBG = new FitFont({id:'batt_bg', font:'Segment16C_50', halign: 'middle', valign: 'middle'})
-battBG.text = "•.•.•.•.";
+// const battBG = new FitFont({id:'batt_bg', font:'Segment16C_50', halign: 'middle', valign: 'middle'})
+// battBG.text = "•.•.•.•.";
 
 
 // Battery level and status
 clock.granularity = "seconds";
 // clock.granularity = "minutes";
 clock.ontick = (evt) => {
+
+    // let bat_ref = document.getElementById("bat_ref");
+    // bat_ref.groupTransform.rotate.angle = 360
+    // const battBG = new FitFont({id:'batt_bg', font:'Segment16C_50', halign: 'middle', valign: 'middle'})
+    // battBG.text = "•.•.•.•.";
+
     const level = battery.chargeLevel;
-    const battFG = new FitFont({id:'batt_fg', font:'Segment16C_50', halign: 'middle', valign: 'middle'})
-    const percent = String("000" + level).slice(-3)
-    battFG.text = String(percent + "%")
+    // const battFG = new FitFont({id:'batt_fg', font:'Segment16C_50', halign: 'middle', valign: 'middle'})
+    let lvl_len = String(level).length
+    let batt_FG;
+    switch (lvl_len) {
+        case 3:
+            batt_FG = new FitFont({id:'batt_fg_100', font:'Segment16C_50', halign: 'middle', valign: 'middle'})
+            break;
+        
+        case 2:
+            batt_FG = new FitFont({id:'batt_fg_10', font:'Segment16C_50', halign: 'middle', valign: 'middle'})
+            break;
+        
+        case 1:
+            batt_FG = new FitFont({id:'batt_fg_1', font:'Segment16C_50', halign: 'middle', valign: 'middle'})
+            break;
+    }
+    const percent = String("•••" + level).slice(-3)
+    batt_FG.text = String(percent + "%")
 }
 
 
@@ -84,4 +105,5 @@ if (today && appbit.permissions.granted("access_activity")) {
     const steps = today.adjusted.steps
     const stepFG = new FitFont({id:'step_fg', font:'Segment16C_120', halign: 'middle', valign: 'middle'})
     stepFG.text = String("00000" + steps).slice(-5)
+    // stepFG.text = String("•••••" + steps).slice(-5)
 }
