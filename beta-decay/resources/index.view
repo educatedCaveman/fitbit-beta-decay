@@ -1,6 +1,8 @@
 <svg>
   <rect width="100%" height="100%" id="background"/>
 
+  <text id="label">β-decay</text>
+
   <!-- BACKGROUNDS -->
   <svg id="text_bg">    
     <!-- STEPS BACKGROUND -->

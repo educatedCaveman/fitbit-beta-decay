@@ -16,3 +16,11 @@
 
 #alt_bg {x: 50%; y: 20%;}
 #alt_fg {x: 50%; y: 20%;}
+
+#label {
+    x: 50%;
+    y: 6%;
+    fill: lightgray;
+    text-anchor: middle;
+    font-size: 20;
+}
