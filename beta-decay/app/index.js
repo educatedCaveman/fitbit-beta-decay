@@ -1,5 +1,5 @@
 import clock from "clock";
-// import * as document from "document";
+import * as document from "document";
 // import { preferences } from "user-settings";
 import { HeartRateSensor } from "heart-rate";
 import { FitFont } from 'fitfont';
@@ -10,6 +10,8 @@ import { BodyPresenceSensor } from "body-presence";
 import { battery } from "power";
 // import { me as companion } from "companion";
 // import weather from "weather";
+
+import * as simpleSettings from "./simple/device-settings";
 
 
 // background for the HR monitor
@@ -30,13 +32,13 @@ const tempBG = new FitFont({ id: 'temp_bg', font: 'Repetition_Scrolling_50', hal
 tempBG.text = "█████";
 
 
+
 // Battery level and status
 clock.granularity = "seconds";
 // clock.granularity = "minutes";
 clock.ontick = (evt) => {
 
   // update the steps
-  // TODO: have setting to toggle the formatting
   if (today && appbit.permissions.granted("access_activity")) {
     const steps = today.adjusted.steps;
     let step_str = String(steps);
@@ -124,4 +126,30 @@ if (BodyPresenceSensor) {
 
   body.start();
 }
+
+
+
+
+let background = document.getElementById("background");
+let text_bg = document.getElementById("text_bg");
+let foreground = document.getElementById("foreground");
+
+
+/* -------- SETTINGS -------- */
+function settingsCallback(data) {
+  if (!data) {
+    return;
+  }
+  // console.log(data)
+  if (data.colorBackground) {
+    background.style.fill = data.colorBackground;
+  }
+  if (data.colorTextBackground) {
+    text_bg.style.fill = data.colorTextBackground;
+  }
+  if (data.colorText) {
+    foreground.style.fill = data.colorText;
+  }
+}
+simpleSettings.initialize(settingsCallback);
 

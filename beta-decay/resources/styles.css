@@ -1,7 +1,8 @@
 /* COLORS */
 #foreground {fill: goldenrod;}
+#background {fill: black;}
 
-#background {fill: #2b2b2b;}
+#text_bg {fill: #2b2b2b;}
 
 #step_bg {x: 333; y: 50%;}
 #step_fg {x: 333; y: 50%;}
