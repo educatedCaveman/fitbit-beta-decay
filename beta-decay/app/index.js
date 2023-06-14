@@ -1,6 +1,5 @@
 import clock from "clock";
 import * as document from "document";
-// import { preferences } from "user-settings";
 import { HeartRateSensor } from "heart-rate";
 import { FitFont } from 'fitfont';
 import { me as appbit } from "appbit";
@@ -8,14 +7,13 @@ import { today } from "user-activity";
 import { display } from "display";
 import { BodyPresenceSensor } from "body-presence";
 import { battery } from "power";
-// import { me as companion } from "companion";
-// import weather from "weather";
-
 import * as simpleSettings from "./simple/device-settings";
+import { Barometer } from "barometer";
 
+
+// TODO: split these sections ount into different files.
 
 // background for the HR monitor
-// const heartBG = new FitFont({id:'heart_bg', font:'Repetition_Scrolling_100', halign: 'end', valign: 'middle'})
 const heartBG = new FitFont({ id: 'heart_bg', font: 'Repetition_Scrolling_120', halign: 'end', valign: 'middle' })
 heartBG.text = "███";
 
@@ -28,8 +26,9 @@ const battBG = new FitFont({ id: 'batt_bg', font: 'Repetition_Scrolling_50', hal
 battBG.text = "████";
 
 // temp background
-const tempBG = new FitFont({ id: 'temp_bg', font: 'Repetition_Scrolling_50', halign: 'end', valign: 'middle' })
-tempBG.text = "█████";
+const altBG = new FitFont({ id: 'alt_bg', font: 'Repetition_Scrolling_50', halign: 'end', valign: 'middle' })
+altBG.text = "█████";
+
 
 
 
@@ -68,20 +67,25 @@ clock.ontick = (evt) => {
   const battFG = new FitFont({ id: 'batt_fg', font: 'Repetition_Scrolling_50', halign: 'end', valign: 'middle' })
   battFG.text = String(battery.chargeLevel + "%");
 
-  // TODO: update the local temperature
-  // if (companion.permissions.granted("access_location")) {
-  //   weather.getWeatherData().then((data) => {
-  //     if (data.locations.length > 0) {
-  //       const temp = Math.floor(data.locations[0].currentWeather.temperature);
-  //       const unit = data.temperatureUnit;
-  //       console.log(`It's ${temp}\u00B0 ${unit} outside`);
-  //     }
-  //   }).catch((ex) => {
-  //     console.error(ex);
-  //   });
-  // }  
-  const tempFG = new FitFont({ id: 'temp_fg', font: 'Repetition_Scrolling_50', halign: 'end', valign: 'middle' })
-  tempFG.text = String("-99°C");
+}
+
+
+function altitudeFromPressure(pressure) {
+  return (1 - (pressure/1013.25)**0.190284)*145366.45;
+}
+
+// todo: fix the formatting here
+if (Barometer) {
+  console.log("This device has a Barometer!");
+  const barometer = new Barometer({ frequency: 1 });
+  barometer.addEventListener("reading", () => {
+    console.log(`Pressure: ${barometer.pressure} Pa`);
+    const altFG = new FitFont({ id: 'alt_fg', font: 'Repetition_Scrolling_50', halign: 'end', valign: 'middle' })
+    altFG.text = String(altitudeFromPressure(barometer.pressure / 100) + "'");
+  });
+  barometer.start();
+} else {
+  console.log("This device does NOT have a Barometer!");
 }
 
 
