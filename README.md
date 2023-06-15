@@ -24,7 +24,7 @@ perform the general install instructions as specified in the getting started gui
 generate the fonts:
 
     npx fitfont-generate ..\fonts\repetition-scrolling\repet___.ttf 120 █1234567890.k-
-    npx fitfont-generate ..\fonts\repetition-scrolling\repet___.ttf 50 █1234567890%-°CFKR
+    npx fitfont-generate ..\fonts\repetition-scrolling\repet___.ttf 50 $(cat chars.txt)
 
 crispen the images, reducing them to purely black/white. to be run on linux. not sure how to do it on windows, if its possible.
 
