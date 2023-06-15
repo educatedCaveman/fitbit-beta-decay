@@ -35,3 +35,9 @@ crispen the images, reducing them to purely black/white. to be run on linux. not
 I wanted a watch face that was basically just steps and heart rate. I already have a really nice watch, and didn't want to not use it. Also, I've had terrible luck with FitBits breaking 30s after the 1y warranty expires.
 
 The name comes from the aforementioned watch. It uses small tritium vials for illumination; [Tritium radioluminescence](https://en.wikipedia.org/wiki/Tritium_radioluminescence) relies on the beta-decay of tritium, hence the name. (β-decay)
+
+## Licensing
+
+I currntly intend to add a payment gate to this code.  However, if you're reading this, ask nicely, and I might send a discount code ;)
+
+To the best of my knowledge, all external resources (e.g. fonts) permit commercial use.
