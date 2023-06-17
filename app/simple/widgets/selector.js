@@ -1,6 +1,7 @@
 // import the various widgets
 import * as glitch from "./glitch"
 import * as altitude from "./altitude"
+import * as model from "./model"
 
 //functions
 export function updateWidget(widgetType, val) {
@@ -23,9 +24,9 @@ export function updateWidget(widgetType, val) {
         case "5":
             return String("TODO5");
 
-        //model: TODO
+        //model
         case "4":
-            return String("TODO4");
+            return model.generateDeviceText();
 
         //weather: TODO
         case "3":
