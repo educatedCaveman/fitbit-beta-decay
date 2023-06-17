@@ -14,8 +14,8 @@
 #heart_fg {x: 267; y: 85%;}
 /* #batt_fg {x: 308; y: 80%;} */
 
-#alt_bg {x: 50%; y: 20%;}
-#alt_fg {x: 50%; y: 20%;}
+#extra_bg {x: 50%; y: 20%;}
+#extra_fg {x: 50%; y: 20%;}
 
 #label {
     x: 50%;

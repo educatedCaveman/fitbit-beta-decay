@@ -27,7 +27,7 @@
       <use href="#fitfont-char"/>
     </use>
     <!-- TEMPERATURE BACKGROUND -->
-    <use href="#fitfont" id="alt_bg">
+    <use href="#fitfont" id="extra_bg">
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
@@ -60,8 +60,8 @@
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
     </use>
-    <!-- TEMPERATURE FOREGROUND -->
-    <use href="#fitfont" id="alt_fg">
+    <!-- EXTRA FOREGROUND -->
+    <use href="#fitfont" id="extra_fg">
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
