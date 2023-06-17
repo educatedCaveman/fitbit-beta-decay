@@ -29,10 +29,24 @@ messaging.peerSocket.addEventListener("message", function(evt) {
 // Register for the unload event
 me.addEventListener("unload", saveSettings);
 
+// // Load settings from filesystem
+// function loadSettings() {
+//   try {
+//     return fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
+//   } catch (ex) {
+//     return {};
+//   }
+// }
+
 // Load settings from filesystem
 function loadSettings() {
   try {
-    return fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
+    let savedSettings = fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
+    if (typeof savedSettings === "undefined") {
+      return {};
+    } else {
+      return savedSettings;
+    }
   } catch (ex) {
     return {};
   }
