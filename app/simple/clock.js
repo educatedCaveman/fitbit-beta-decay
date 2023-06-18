@@ -4,11 +4,22 @@ import { battery } from "power";
 import { me as appbit } from "appbit";
 
 let clockCallback;
+let allChars = "\"!#$%&'()*+,-./1234567890:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¥¦¨©«®°±²³´¶¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ‐–—‘’“”…█"
+
 
 export function initialize(granularity, callback) {
     clock.granularity = granularity;
     clockCallback = callback;
     clock.addEventListener("tick", tickHandler);
+}
+
+function generateGlitchTxt() {
+    let glitchStr = "";
+    for (let i = 0; i < 5; i++) {
+        let index = Math.floor(Math.random() * allChars.length);
+        glitchStr = glitchStr + allChars[index];
+    }
+    return glitchStr;
 }
 
 function tickHandler(evt) {
@@ -43,12 +54,7 @@ function tickHandler(evt) {
     clockCallback({ 
         steps: step_fmt, 
         batt: batt_str,
-        year: evt.date.getFullYear(),
-        month: evt.date.getMonth(),
-        day: evt.date.getDate(),
-        hrs: evt.date.getHours(),
-        mins: evt.date.getMinutes(),
-        secs: evt.date.getSeconds(),
+        glitch: generateGlitchTxt(),
     });
 
 }
