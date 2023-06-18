@@ -39,10 +39,17 @@ function tickHandler(evt) {
     // battery percentage string
     let batt_str = String(battery.chargeLevel + "%");
 
-    //extra string:
-    let extraString = "12345";
-
-    clockCallback({ steps: step_fmt, batt: batt_str, extra: extraString });
+    // callback
+    clockCallback({ 
+        steps: step_fmt, 
+        batt: batt_str,
+        year: evt.date.getFullYear(),
+        month: evt.date.getMonth(),
+        day: evt.date.getDate(),
+        hrs: evt.date.getHours(),
+        mins: evt.date.getMinutes(),
+        secs: evt.date.getSeconds(),
+    });
 
 }
 
