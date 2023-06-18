@@ -22,9 +22,27 @@
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
     </use>
     <!-- BATTERY BACKGROUND -->
     <use href="#fitfont" id="batt_bg">
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
@@ -35,9 +53,25 @@
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
     </use>
     <!-- TEMPERATURE BACKGROUND -->
     <use href="#fitfont" id="extra_bg">
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
+      <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>

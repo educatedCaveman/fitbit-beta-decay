@@ -10,6 +10,8 @@ These are notes take while developing the watchface.
 | 100       | 55    | 69     |
 | 50        | 28    | 35     |
 
+
+110 61 82
 ## Useful Commands
 
 ### setup
