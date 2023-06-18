@@ -1,16 +1,13 @@
 import * as document from "document";
 import * as simpleSettings from "./simple/device-settings";
-
 import * as drawText from "./simple/draw-text"
 import * as nonClock from "./simple/clock"
 import * as heartRateMon from "./simple/hrm"
 import * as widgetSelector from "./simple/widgets/selector"
-// import * as altitude from "./simple/widgets/altitude"
 
 let widgetType = 0;
-// let altPressure = -1;
+let widgetValue = null;
 
-// TODO: split these sections ount into different files.
 
 /* --------- DRAW BACKGROUND ---------- */
 drawText.drawBackground();
@@ -20,25 +17,31 @@ drawText.drawBackground();
 // steps, battery level, and extra thingy
 function clockCallback(data) {
     //steps
-    drawText.drawBigText(data.steps, 'step_fg')
+    drawText.drawBigText(data.steps, 'step_fg');
+
     //batt
-    drawText.drawLittleText(data.batt, 'batt_fg')
+    drawText.drawLittleText(data.batt, 'batt_fg');
+
     //extra
-    //how to handle clock?
-    let widget_txt = widgetSelector.updateWidget(widgetType)
-    drawText.drawLittleText(widget_txt, 'extra_fg');
+     let widget_info = {
+        widgetType: widgetType,
+        currentValue: widgetValue,
+        year: data.year,
+        month: data.month,
+        day: data.day,
+        hour: data.hrs,
+        mins: data.mins,
+        secs: data.secs,
+    };
+
+    // update the widget value, depending on the type, currnt value, and date/time
+    widgetValue = widgetSelector.updateWidget(widget_info);
+
+    // whatever the value, redraw it, regardless of wether it changed or not
+    drawText.drawLittleText(widgetValue, 'extra_fg');
 }
 nonClock.initialize("seconds", clockCallback);
 
-
-
-// /* --------- ALTITUDE ---------- */
-// function pressureCallback(data) {
-//     //heart rate
-//     altPressure = data.pressure;
-//     console.log("callback pressure: " + altPressure);
-// }
-// altitude.initialize(pressureCallback);
 
 
 /* --------- HRM ---------- */
@@ -70,8 +73,19 @@ function settingsCallback(data) {
         foreground.style.fill = data.colorText;
     }
     if (data.widgetType) {
-        widgetType = data.widgetType.values[0].value;
-        drawText.drawLittleText(widgetSelector.updateWidget(widgetType), 'extra_fg');
+        // reset the widget
+        let widget_info = {
+            widgetType: data.widgetType.values[0].value,
+            currentValue: null,
+            year: 0,
+            month: 0,
+            day: 0,
+            hour: 0,
+            mins: 0,
+            secs: 0,
+        }
+        
+        drawText.drawLittleText(widgetSelector.updateWidget(widget_info), 'extra_fg');
     }
 }
 simpleSettings.initialize(settingsCallback);
