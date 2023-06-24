@@ -17,7 +17,9 @@ function clockCallback(data) {
     //extra (glitch)
     drawText.drawLittleText(data.glitch, 'extra_fg');
 }
-nonClock.initialize("minutes", clockCallback);
+// seconds for testing. minutes for IRL
+// nonClock.initialize("minutes", clockCallback);
+nonClock.initialize("seconds", clockCallback);
 
 
 /* --------- HRM ---------- */

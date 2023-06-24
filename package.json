@@ -15,8 +15,8 @@
       "access_location"
     ],
     "buildTargets": [
-      "hera",
-      "rhea"
+      "vulcan",
+      "atlas"
     ],
     "i18n": {},
     "defaultLanguage": "en-US",
