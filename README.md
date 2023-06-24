@@ -10,6 +10,19 @@ These are notes take while developing the watchface.
 | 100       | 55    | 69     |
 | 50        | 28    | 35     |
 
+### names for multiple versions
+
+| display type | platform    | cost | description/name           | alt name               |
+| ------------ | ----------- | ---- | -------------------------- | ---------------------- |
+| dot-matrix   | hera / rhea | paid | beta-decay                 | beta-decay (v2)        |
+| dot-matrix   | hera / rhea | free | beta-decay (free)          | beta-decay (v2, free)  |
+| dot-matrix   | older       | paid | beta-decay (legacy)        | beta-decay             |
+| dot-matrix   | older       | free | beta-decay (legacy, free)  | beta-decay             |
+| 16-segment   | hera / rhea | paid | alpha-decay                | alpha-decay (v2)       |
+| 16-segment   | hera / rhea | free | alpha-decay (free)         | alpha-decay (v2, free) |
+| 16-segment   | older       | paid | alpha-decay (legacy)       | alpha-decay            |
+| 16-segment   | older       | free | alpha-decay (legacy, free) | alpha-decay            |
+
 ## Useful Commands
 
 ### setup
@@ -38,6 +51,6 @@ The name comes from the aforementioned watch. It uses small tritium vials for il
 
 ## Licensing
 
-I currntly intend to add a payment gate to this code.  However, if you're reading this, ask nicely, and I might send a discount code ;)
+I currntly intend to add a payment gate to this code. However, if you're reading this, ask nicely, and I might send a discount code ;)
 
 To the best of my knowledge, all external resources (e.g. fonts) permit commercial use.
