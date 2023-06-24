@@ -15,8 +15,6 @@
       "access_location"
     ],
     "buildTargets": [
-      "atlas",
-      "vulcan",
       "hera",
       "rhea"
     ],
