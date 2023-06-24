@@ -12,18 +12,18 @@ export function drawBackground() {
 
     // the background for the step counter
     const stepBG = new FitFont({ id: 'step_bg', font: bigText, halign: 'end', valign: 'middle' })
-    // stepBG.text = "¦•.¦•.¦•.¦•.¦•.";
-    stepBG.text = "88888";
+    stepBG.text = "¦•.¦•.¦•.¦•.¦•.";
+    // stepBG.text = "88888";
 
     // battery background
     const battBG = new FitFont({ id: 'batt_bg', font: littleText, halign: 'end', valign: 'middle' })
     battBG.text = "¦•.¦•.¦•.¦•.";
     // battBG.text = "8888";
 
-    // // temp background
-    // const altBG = new FitFont({ id: 'extra_bg', font: littleText, halign: 'end', valign: 'middle' })
-    // altBG.text = "¦•.¦•.¦•.¦•.¦•.";
-    // // altBG.text = "88888";
+    // extra background
+    const altBG = new FitFont({ id: 'extra_bg', font: littleText, halign: 'end', valign: 'middle' })
+    altBG.text = "¦•.¦•.¦•.¦•.¦•.";
+    // altBG.text = "88888";
 
     // // label/name
     // const label = new FitFont({ id: 'label', font: labelText, halign: 'middle', valign: 'middle'})

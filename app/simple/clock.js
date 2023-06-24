@@ -4,7 +4,6 @@ import { battery } from "power";
 import { me as appbit } from "appbit";
 
 let clockCallback;
-let allChars = "\"!#$%&'()*+,-./1234567890:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¥¦¨©«®°±²³´¶¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ‐–—‘’“”…█"
 let extASCII = "!\"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ█"
 
 
@@ -17,8 +16,8 @@ export function initialize(granularity, callback) {
 function generateGlitchTxt() {
     let glitchStr = "";
     for (let i = 0; i < 5; i++) {
-        let index = Math.floor(Math.random() * allChars.length);
-        glitchStr = glitchStr + allChars[index];
+        let index = Math.floor(Math.random() * extASCII.length);
+        glitchStr = glitchStr + extASCII[index];
     }
     return glitchStr;
 }
@@ -32,17 +31,8 @@ function tickHandler(evt) {
         let step_str = String(steps);
         if (step_str.length > 3) {
             let k_step = step_str.slice(0, -3)
-            let step_fraction;
-            // 1k-9.99k
-            if (k_step.length === 1) {
-                step_fraction = step_str.slice(-3, -1)
-                step_fmt = String(k_step + "." + step_fraction + "k")
-            }
-            // >= 10k
-            else {
-                step_fraction = step_str.slice(-3, -2)
-                step_fmt = String(k_step + "." + step_fraction + "k")
-            }
+            let step_fraction = step_str.slice(-3);
+            step_fmt = String(k_step + "." + step_fraction);
         } else {
             step_fmt = step_str
         }

@@ -1,7 +1,7 @@
 <svg>
   <rect width="100%" height="100%" id="background"/>
 
-  <text id="label">β-decay</text>
+  <text id="label">α-decay</text>
 
   <!-- BACKGROUNDS -->
   <svg id="text_bg">    
@@ -51,7 +51,7 @@
       <use href="#fitfont-char"/>
     </use>
     <!-- EXTRA BACKGROUND -->
-    <!-- <use href="#fitfont" id="extra_bg">
+    <use href="#fitfont" id="extra_bg">
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
@@ -67,7 +67,7 @@
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
-    </use> -->
+    </use>
   </svg>
 
 
@@ -92,7 +92,7 @@
       <use href="#fitfont-char"/>
     </use>
     <!-- BATTERY FOREGROUND -->
-    <!-- <use href="#fitfont" id="batt_fg">
+    <use href="#fitfont" id="batt_fg">
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
@@ -105,7 +105,7 @@
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
-    </use> -->
+    </use>
     <!-- HEART RATE FOREGROUND -->
     <use href="#fitfont" id="heart_fg">
       <use href="#fitfont-char"/>
@@ -119,12 +119,12 @@
       <use href="#fitfont-char"/>
     </use>
     <!-- EXTRA FOREGROUND -->
-    <!-- <use href="#fitfont" id="extra_fg">
+    <use href="#fitfont" id="extra_fg">
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
-    </use> -->
+    </use>
   </svg>
 </svg>
