@@ -2,6 +2,7 @@ import { FitFont } from 'fitfont';
 
 let littleText = 'Repetition_Scrolling_50';
 let bigText = 'Repetition_Scrolling_120';
+// let labelText = 'Hack_20';
 
 export function drawBackground() {
     // background for the HR monitor
@@ -19,6 +20,11 @@ export function drawBackground() {
     // temp background
     const altBG = new FitFont({ id: 'extra_bg', font: littleText, halign: 'end', valign: 'middle' })
     altBG.text = "█████";
+
+    // // label/name
+    // const label = new FitFont({ id: 'label', font: labelText, halign: 'middle', valign: 'middle'})
+    // // label.text = "β-decay";
+    // label.text = "ß-decay";
 }
 
 
