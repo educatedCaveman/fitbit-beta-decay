@@ -1,6 +1,6 @@
-import * as drawText from "./simple/draw-text"
-import * as nonClock from "./simple/clock"
-import * as heartRateMon from "./simple/hrm"
+import * as drawText from "./draw-text"
+import * as nonClock from "./clock"
+import * as heartRateMon from "./hrm"
 
 /* --------- DRAW BACKGROUND ---------- */
 drawText.drawBackground();
