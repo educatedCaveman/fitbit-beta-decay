@@ -7,6 +7,7 @@
     - [Glitch](#glitch)
     - [None](#none)
     - [Time](#time-1)
+    - [Date](#date)
     - [Upcoming](#upcoming)
 - [Background](#background)
 - [Licensing](#licensing)
@@ -22,8 +23,10 @@
 
 # Features
 
+![glitch](screenshots/glitch.png)
+
 ## Time
-Or lack thereof.  I don't actually care about seeing the time on my fitbit.  I have a watch I use for that. See the [Background Section](#background) for details.
+Or lack thereof.  I don't actually care about seeing the time on my fitbit.  I have a watch I use for that. See the [Background Section](#background) for details.  I have also added a time complication, if someone not in my situation wants it.
 
 ## Steps
 Steps are front and center. I may change this to be the primary goal.  For the time being, this is not configurable.  After `999` steps, it will display as `1.00k`. After `9999` steps, it will display as `10.0k`.  I'm assuming nobody will get 100k steps in a day.  If you do, [IT'S TIME TO STOP!](https://youtu.be/x0dHUXLmSYQ)
@@ -38,17 +41,28 @@ Its a useful stat, in the top right.  This is not configurable, and I do not hav
 Admittedly, this is a complete afterthought.  While mocking up the UI, I felt that this area needed *something*, but I didn't have a good sense of what *I* wanted there.  So, I decided to make it a single selection of the following:
 
 ### Glitch
+
 Once per tick, a random selection of all the characters in the dot-matrix font is displayed.  There is no great meaning here.  It's gibberish.
+
+![glitch](screenshots/glitch.png)
 
 ### None
 The complication is filled with full blocks; "█"
 
+![glitch](screenshots/none.png)
+
 ### Time
 Self explanatory.  As much as I don't care about it, others might.  The format takes into account user's time format setting.
 
+![glitch](screenshots/time.png)
+
+### Date
+Self explanatory.  The format is configurable within the Date Format menu.  I think all desired formats that can fit in 5 characters for any day of the year are present.  If you think one is missing or would like another, just ask.
+
+![glitch](screenshots/date_DOWdd_lower.png)
+
 ### Upcoming
 
-- [ ] Date
 - [ ] Altitude
 - [ ] Weather
 - [ ] Model

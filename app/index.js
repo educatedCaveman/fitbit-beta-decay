@@ -44,7 +44,6 @@ heartRateMon.initialize(hrmCallback);
 
 /* -------- SETTINGS -------- */
 function settingsCallback(data) {
-    // console.log(JSON.stringify(data))
     // handle no data
     if (!data) {
         return;
