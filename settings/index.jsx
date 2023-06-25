@@ -58,7 +58,8 @@ function mySettings(props) {
           selectViewTitle="Complication"
           settingsKey="complication"
           options={[
-            {name:"Glitch", value: "1"},
+            {name:"Glitch", value: "1"},            
+            {name:"Time", value: "2"},
             {name:"None", value: "99"}
           ]}
           // {"values":[{"name":"Glitch","value":"1"}],"selected":[0]}
