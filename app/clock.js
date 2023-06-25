@@ -1,8 +1,8 @@
 import clock from "clock";
-import { today } from "user-activity";
 import { battery } from "power";
-import { me as appbit } from "appbit";
-import * as widgets from "./widgets";
+import * as complication from "./complications";
+import * as steps from "./steps";
+import * as simpleSettings from "./device-settings";
 
 let clockCallback;
 
@@ -14,38 +14,16 @@ export function initialize(granularity, callback) {
 
 
 function tickHandler(evt) {
-    // update the steps
-    let step_fmt;
 
-    if (today && appbit.permissions.granted("access_activity")) {
-        const steps = today.adjusted.steps;
-        let step_str = String(steps);
-        if (step_str.length > 3) {
-            let k_step = step_str.slice(0, -3)
-            let step_fraction;
-            // 1k-9.99k
-            if (k_step.length === 1) {
-                step_fraction = step_str.slice(-3, -1)
-                step_fmt = String(k_step + "." + step_fraction + "k")
-            }
-            // >= 10k
-            else {
-                step_fraction = step_str.slice(-3, -2)
-                step_fmt = String(k_step + "." + step_fraction + "k")
-            }
-        } else {
-            step_fmt = step_str
-        }
-    }
-
-    // battery percentage string
-    let batt_str = String(battery.chargeLevel + "%");
+    // handle complication
+    let compType = simpleSettings.getCompType();
+    let compText = complication.getCompText(compType, evt);
 
     // callback
     clockCallback({ 
-        steps: step_fmt, 
-        batt: batt_str,
-        glitch: widgets.generateGlitchTxt(),
+        steps: steps.getFormattedSteps(), 
+        batt: String(battery.chargeLevel + "%"),
+        comp: compText,
     });
 
 }

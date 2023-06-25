@@ -4,6 +4,7 @@ let littleText = 'Repetition_Scrolling_50';
 let bigText = 'Repetition_Scrolling_120';
 // let labelText = 'Hack_20';
 
+// TODO: if i add multiple fonts, i'll need multiple backround texts
 export function drawBackground() {
     // background for the HR monitor
     const heartBG = new FitFont({ id: 'heart_bg', font: bigText, halign: 'end', valign: 'middle' })
@@ -17,14 +18,10 @@ export function drawBackground() {
     const battBG = new FitFont({ id: 'batt_bg', font: littleText, halign: 'end', valign: 'middle' })
     battBG.text = "████";
 
-    // temp background
-    const altBG = new FitFont({ id: 'extra_bg', font: littleText, halign: 'end', valign: 'middle' })
-    altBG.text = "█████";
+    // complication background
+    const compBG = new FitFont({ id: 'comp_bg', font: littleText, halign: 'end', valign: 'middle' })
+    compBG.text = "█████";
 
-    // // label/name
-    // const label = new FitFont({ id: 'label', font: labelText, halign: 'middle', valign: 'middle'})
-    // // label.text = "β-decay";
-    // label.text = "ß-decay";
 }
 
 

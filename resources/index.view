@@ -1,16 +1,6 @@
 <svg>
   <rect width="100%" height="100%" id="background"/>
 
-
-  <!-- <use href="#fitfont" id="label">
-    <use href="#fitfont-char"/>
-    <use href="#fitfont-char"/>
-    <use href="#fitfont-char"/>
-    <use href="#fitfont-char"/>
-    <use href="#fitfont-char"/>
-    <use href="#fitfont-char"/>
-    <use href="#fitfont-char"/>
-  </use> -->
   <text id="label">β-decay</text>
 
   <!-- BACKGROUNDS -->
@@ -36,8 +26,8 @@
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
     </use>
-    <!-- TEMPERATURE BACKGROUND -->
-    <use href="#fitfont" id="extra_bg">
+    <!-- COMPLICATION BACKGROUND -->
+    <use href="#fitfont" id="comp_bg">
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
@@ -45,7 +35,6 @@
       <use href="#fitfont-char"/>
     </use>
   </svg>
-
 
   <!-- FOREGROUNDS -->
   <svg id="foreground">
@@ -70,8 +59,8 @@
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
     </use>
-    <!-- EXTRA FOREGROUND -->
-    <use href="#fitfont" id="extra_fg">
+    <!-- COMPLICATION FOREGROUND -->
+    <use href="#fitfont" id="comp_fg">
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>
       <use href="#fitfont-char"/>

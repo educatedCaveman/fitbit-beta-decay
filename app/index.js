@@ -1,6 +1,19 @@
+import document from "document";
 import * as drawText from "./draw-text"
 import * as nonClock from "./clock"
 import * as heartRateMon from "./hrm"
+import * as simpleSettings from "./device-settings";
+
+
+/* --------- Document/UI elements ---------- */
+let background = document.getElementById("background");
+let textBG = document.getElementById("text_bg");
+let text = document.getElementById("foreground");
+let label = document.getElementById("label");
+
+/* --------- Complication ---------- */
+// default to glitch
+let complication = "1";
 
 /* --------- DRAW BACKGROUND ---------- */
 drawText.drawBackground();
@@ -14,8 +27,8 @@ function clockCallback(data) {
     //batt
     drawText.drawLittleText(data.batt, 'batt_fg');
 
-    //extra (glitch)
-    drawText.drawLittleText(data.glitch, 'extra_fg');
+    //complication
+    drawText.drawLittleText(data.comp, 'comp_fg');
 }
 // seconds for testing. minutes for IRL
 // nonClock.initialize("minutes", clockCallback);
@@ -28,3 +41,44 @@ function hrmCallback(data) {
     drawText.drawBigText(data.bpm, 'heart_fg')
 }
 heartRateMon.initialize(hrmCallback);
+
+/* -------- SETTINGS -------- */
+function settingsCallback(data) {
+    // console.log(JSON.stringify(data))
+    // handle no data
+    if (!data) {
+        return;
+    }
+
+    // complication
+    if (data.complication) {
+        complication = data.complication;
+    }
+
+    // text color
+    if (data.colorText) {
+        text.style.fill = data.colorText;
+    }
+
+    // text background color. preset/custom
+    if (data.colorTextBackground) {
+        textBG.style.fill = data.colorTextBackground;
+    }
+
+    // text background opacity
+    if (data.opacityTextBackground) {
+        textBG.style.fillOpacity = data.opacityTextBackground/100;
+    }
+
+    // background color
+    if (data.colorBackground) {
+        background.style.fill = data.colorBackground;
+    }
+
+    // lable color
+    if (data.colorLabel) {
+        label.style.fill = data.colorLabel;
+    }
+    
+}
+simpleSettings.initialize(settingsCallback);
