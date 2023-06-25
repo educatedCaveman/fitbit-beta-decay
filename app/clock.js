@@ -2,10 +2,9 @@ import clock from "clock";
 import { today } from "user-activity";
 import { battery } from "power";
 import { me as appbit } from "appbit";
+import * as widgets from "./widgets";
 
 let clockCallback;
-let allChars = "\"!#$%&'()*+,-./1234567890:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¥¦¨©«®°±²³´¶¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ‐–—‘’“”…█"
-
 
 export function initialize(granularity, callback) {
     clock.granularity = granularity;
@@ -13,14 +12,6 @@ export function initialize(granularity, callback) {
     clock.addEventListener("tick", tickHandler);
 }
 
-function generateGlitchTxt() {
-    let glitchStr = "";
-    for (let i = 0; i < 5; i++) {
-        let index = Math.floor(Math.random() * allChars.length);
-        glitchStr = glitchStr + allChars[index];
-    }
-    return glitchStr;
-}
 
 function tickHandler(evt) {
     // update the steps
@@ -54,7 +45,7 @@ function tickHandler(evt) {
     clockCallback({ 
         steps: step_fmt, 
         batt: batt_str,
-        glitch: generateGlitchTxt(),
+        glitch: widgets.generateGlitchTxt(),
     });
 
 }
