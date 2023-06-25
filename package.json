@@ -15,8 +15,7 @@
       "access_location"
     ],
     "buildTargets": [
-      "vulcan",
-      "atlas"
+      "vulcan"
     ],
     "i18n": {},
     "defaultLanguage": "en-US",
@@ -27,10 +26,14 @@
     "debug": "fitbit"
   },
   "dependencies": {
-    "fitfont": "^1.3.3",    
-    "yarn": "^1.22.19",
     "@fitbit/sdk": "~7.1.0-pre.0",
     "@fitbit/sdk-cli": "~1.8.0-pre.10",
-    "@fitbit/sdk-build-targets": "cmengler/fitbit-sdk-build-targets"
+    "fitfont": "^1.3.3",
+    "fp-ts": "^2.16.0",
+    "io-ts": "^2.2.20",
+    "yarn": "^1.22.19"
+  },
+  "devDependencies": {
+    "fitbit-sdk-types": "^8.0.3"
   }
 }
