@@ -35,3 +35,9 @@ function loadSettings() {
 function saveSettings() {
   fs.writeFileSync(SETTINGS_FILE, settings, SETTINGS_TYPE);
 }
+
+export function getCompType() {
+  let settingsVal = settings['complication'].values[0].value
+  console.log("settingsVal: " + JSON.stringify(settingsVal))
+  return settingsVal
+}

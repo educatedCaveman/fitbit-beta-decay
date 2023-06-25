@@ -1,7 +1,8 @@
 import clock from "clock";
 import { battery } from "power";
-import * as widgets from "./widgets";
+import * as complication from "./complications";
 import * as steps from "./steps";
+import * as simpleSettings from "./device-settings";
 
 let clockCallback;
 
@@ -14,11 +15,15 @@ export function initialize(granularity, callback) {
 
 function tickHandler(evt) {
 
+    // handle complication
+    let compType = simpleSettings.getCompType();
+    let compText = complication.getCompText(compType, evt);
+
     // callback
     clockCallback({ 
         steps: steps.getFormattedSteps(), 
         batt: String(battery.chargeLevel + "%"),
-        glitch: widgets.generateGlitchTxt(),
+        comp: compText,
     });
 
 }

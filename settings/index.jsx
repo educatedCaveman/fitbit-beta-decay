@@ -52,6 +52,19 @@ const colorSet = [
 function mySettings(props) {
   return (
     <Page>
+      <Section title="Complication">
+        <Select
+          label={`Complication`}
+          selectViewTitle="Complication"
+          settingsKey="complication"
+          options={[
+            {name:"Glitch", value: "1"},
+            {name:"None", value: "99"}
+          ]}
+          // {"values":[{"name":"Glitch","value":"1"}],"selected":[0]}
+          onSelection={(selection) => props.settingsStorage.setItem('complication', selection.values[0].value)}
+        />
+      </Section>
       <Section title="Text Color">
         <ColorSelect settingsKey="colorText" colors={colorSet} />
       </Section>

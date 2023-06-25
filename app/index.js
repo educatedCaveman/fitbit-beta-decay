@@ -11,6 +11,9 @@ let textBG = document.getElementById("text_bg");
 let text = document.getElementById("foreground");
 let label = document.getElementById("label");
 
+/* --------- Complication ---------- */
+// default to glitch
+let complication = "1";
 
 /* --------- DRAW BACKGROUND ---------- */
 drawText.drawBackground();
@@ -24,8 +27,8 @@ function clockCallback(data) {
     //batt
     drawText.drawLittleText(data.batt, 'batt_fg');
 
-    //extra (glitch)
-    drawText.drawLittleText(data.glitch, 'extra_fg');
+    //complication
+    drawText.drawLittleText(data.comp, 'comp_fg');
 }
 // seconds for testing. minutes for IRL
 // nonClock.initialize("minutes", clockCallback);
@@ -41,10 +44,15 @@ heartRateMon.initialize(hrmCallback);
 
 /* -------- SETTINGS -------- */
 function settingsCallback(data) {
-    console.log(JSON.stringify(data))
+    // console.log(JSON.stringify(data))
     // handle no data
     if (!data) {
         return;
+    }
+
+    // complication
+    if (data.complication) {
+        complication = data.complication;
     }
 
     // text color
@@ -56,9 +64,6 @@ function settingsCallback(data) {
     if (data.colorTextBackground) {
         textBG.style.fill = data.colorTextBackground;
     }
-    // if (data.colorTextBackgroundCustom) {
-    //     textBG.style.fill = data.colorTextBackgroundCustom;
-    // }
 
     // text background opacity
     if (data.opacityTextBackground) {
