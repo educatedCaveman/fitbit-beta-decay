@@ -1,3 +1,3 @@
-import * as simpleSettings from "./simple/companion-settings";
+import * as simpleSettings from "./companion-settings";
 
 simpleSettings.initialize();

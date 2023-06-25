@@ -2,7 +2,7 @@ import document from "document";
 import * as drawText from "./draw-text"
 import * as nonClock from "./clock"
 import * as heartRateMon from "./hrm"
-import * as simpleSettings from "./simple/device-settings";
+import * as simpleSettings from "./device-settings";
 
 
 /* --------- Document/UI elements ---------- */
