@@ -41,7 +41,7 @@ heartRateMon.initialize(hrmCallback);
 
 /* -------- SETTINGS -------- */
 function settingsCallback(data) {
-    console.log(JSON.stringify(data))
+    // console.log(JSON.stringify(data))
     // handle no data
     if (!data) {
         return;
@@ -55,6 +55,11 @@ function settingsCallback(data) {
     // text background color
     if (data.colorTextBackground) {
         textBG.style.fill = data.colorTextBackground;
+    }
+
+    // text background opacity
+    if (data.opacityTextBackground) {
+        textBG.style.fillOpacity = data.opacityTextBackground/100;
     }
 
     // background color

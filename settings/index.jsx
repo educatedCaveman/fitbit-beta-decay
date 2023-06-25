@@ -49,26 +49,36 @@ const colorSet = [
   {color: "red"}       
 ];
 
-const options = [
-  ['Text Color', 'colorText'],
-  ['Text Background Color', 'colorTextBackground'],
-  ['Background Color', 'colorBackground'],
-  ['Label Color', 'colorLabel'],
-];
-
 function mySettings(props) {
   return (
     <Page>
-      {options.map(([title, settingsKey]) =>
-        <Section
-          title={title}>
-          <ColorSelect
-            settingsKey={settingsKey}
-            colors={colorSet} />
-        </Section>
-      )}
+      <Section title="Text Color">
+        <ColorSelect settingsKey="colorText" colors={colorSet} />
+      </Section>
+      <Section title="Text Background Color">
+        <Slider 
+          label="Opacity" 
+          settingsKey="opacityTextBackground" 
+          min="0" 
+          max="100"
+          onChange={value => props.settingsStorage.setItem('opacityTextBackground', value)}/>
+        <ColorSelect settingsKey="colorTextBackground" colors={colorSet} />
+      </Section>
+      <Section title="Background Color">
+        <ColorSelect settingsKey="colorBackground" colors={colorSet} />
+      </Section>
+      <Section title="Label Color">
+        <ColorSelect settingsKey="colorLabel" colors={colorSet} />
+      </Section>
+      <Section>
+        <Button
+          list
+          label="Reset Settings"
+          onClick={() => props.settingsStorage.clear()}
+        />
+      </Section>
     </Page>
-  );
+  )
 }
 
 registerSettingsPage(mySettings);

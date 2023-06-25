@@ -23,6 +23,10 @@ These are notes take while developing the watchface.
 | 16-segment   | older       | paid | alpha-decay (legacy)       | alpha-decay            |
 | 16-segment   | older       | free | alpha-decay (legacy, free) | alpha-decay            |
 
+### settings
+
+my local settings path is `C:\Users\drake\AppData\Roaming\Fitbit OS Simulator\vulcan\companion\app_72f2cf03-6f6e-4e60-b834-feca06a79361\settingsstorage`
+
 ## Useful Commands
 
 ### setup
