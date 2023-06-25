@@ -6,6 +6,7 @@
   - [Complications](#complications)
     - [Glitch](#glitch)
     - [None](#none)
+    - [Time](#time-1)
     - [Upcoming](#upcoming)
 - [Background](#background)
 - [Licensing](#licensing)
@@ -42,9 +43,11 @@ Once per tick, a random selection of all the characters in the dot-matrix font i
 ### None
 The complication is filled with full blocks; "█"
 
+### Time
+Self explanatory.  As much as I don't care about it, others might.  The format takes into account user's time format setting.
+
 ### Upcoming
 
-- [ ] Time
 - [ ] Date
 - [ ] Altitude
 - [ ] Weather
