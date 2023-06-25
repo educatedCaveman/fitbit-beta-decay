@@ -41,7 +41,7 @@ heartRateMon.initialize(hrmCallback);
 
 /* -------- SETTINGS -------- */
 function settingsCallback(data) {
-    // console.log(JSON.stringify(data))
+    console.log(JSON.stringify(data))
     // handle no data
     if (!data) {
         return;
@@ -52,10 +52,13 @@ function settingsCallback(data) {
         text.style.fill = data.colorText;
     }
 
-    // text background color
+    // text background color. preset/custom
     if (data.colorTextBackground) {
         textBG.style.fill = data.colorTextBackground;
     }
+    // if (data.colorTextBackgroundCustom) {
+    //     textBG.style.fill = data.colorTextBackgroundCustom;
+    // }
 
     // text background opacity
     if (data.opacityTextBackground) {
@@ -71,6 +74,6 @@ function settingsCallback(data) {
     if (data.colorLabel) {
         label.style.fill = data.colorLabel;
     }
-
+    
 }
 simpleSettings.initialize(settingsCallback);

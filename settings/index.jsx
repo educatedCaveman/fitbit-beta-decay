@@ -57,10 +57,7 @@ function mySettings(props) {
       </Section>
       <Section title="Text Background Color">
         <Slider 
-          label="Opacity" 
-          settingsKey="opacityTextBackground" 
-          min="0" 
-          max="100"
+          label="Opacity" settingsKey="opacityTextBackground" min="0" max="100"
           onChange={value => props.settingsStorage.setItem('opacityTextBackground', value)}/>
         <ColorSelect settingsKey="colorTextBackground" colors={colorSet} />
       </Section>

@@ -1,10 +1,4 @@
-/*
-  Responsible for loading, applying and saving settings.
-  Requires companion/simple/companion-settings.js
-  Callback should be used to update your UI.
-*/
 import { me } from "appbit";
-import { me as device } from "device";
 import * as fs from "fs";
 import * as messaging from "messaging";
 
@@ -29,7 +23,7 @@ messaging.peerSocket.addEventListener("message", function(evt) {
 me.addEventListener("unload", saveSettings);
 
 // Load settings from filesystem
-function loadSettings() {
+function loadSettings() {  
   try {
     return fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
   } catch (ex) {
