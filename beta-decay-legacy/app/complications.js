@@ -1,6 +1,7 @@
 import { preferences } from "user-settings";
 import * as utils from "./utils";
 import * as simpleSettings from "./device-settings";
+import { me as device } from "device";
 
 const allChars = "\"!#$%&'()*+,-./1234567890:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¥¦¨©«®°±²³´¶¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ‐–—‘’“”…█"
 const asciiExtended = " !\"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ"
@@ -37,7 +38,6 @@ export function getCompText(compType, tickEvent) {
     return compText;
 }
 
-
 // TODO: if i have a swtich between the font types, need to switch between the 2 character sets.
 function generateGlitchTxt() {
     let glitchStr = "";
@@ -51,7 +51,6 @@ function generateGlitchTxt() {
 function generateNoneWidget() {
     return String("█████");
 }
-
 
 function generateTimeStr(tickEvent) {
     // get initial hour and minute values
@@ -73,7 +72,6 @@ function generateTimeStr(tickEvent) {
 
     return timeStr;
 }
-
 
 function generateDateStr(tickEvent) {
     // interogate the tickEvent    
@@ -162,4 +160,11 @@ function generateDateStr(tickEvent) {
             break;
     }
     return dateStr;
+}
+
+function generateModelStr() {
+    // TODO: get setting for which to show
+    // https://dev.fitbit.com/build/reference/device-api/device/
+    // device.type is like hera or rhea
+    // device.modelName is like sense or versa
 }
