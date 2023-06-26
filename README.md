@@ -137,6 +137,26 @@ To crispen the images, reducing them to purely black/white, run the following co
 
     find . -path "*.png" -exec convert '{}' -posterize 2 '{}' \;
 
+### Setup for Sideloading
+
+**TODO**: make this a script
+
+1. recursively delete `package-lock.json`, `yarn.lock`, `app/`, `build/`, `companion/`, `node_modules/`, `resources/`, and `settings/`.
+2. recursively copy `app/`, `companion/`, `resources/`, and `settings/` into destination.
+3. cd destination
+4. run the following commands:
+
+        yarn install
+        yarn build
+        export FITBIT_QA_COMMANDS=1
+        yarn debug
+
+5. manually run the following commands on the `fitbot$` prompt:
+
+        hosts
+        connect phone
+        connect device
+        build-and-install
 
 
 
