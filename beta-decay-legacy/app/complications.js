@@ -25,6 +25,11 @@ export function getCompText(compType, tickEvent) {
         case "3":
             compText = generateDateStr(tickEvent);
             break;
+
+        // Model
+        case "3":
+            compText = generateModelStr();
+            break;
     
         // glitch (default)
         case "1":
@@ -167,4 +172,27 @@ function generateModelStr() {
     // https://dev.fitbit.com/build/reference/device-api/device/
     // device.type is like hera or rhea
     // device.modelName is like sense or versa
+
+    // TODO: need to wait for versa 4 and sense 2 model info
+    models = {
+        '36': {truncated: "VERSA", squished: "VRSA3", code: "ATLAS"},
+        '44': {truncated: "SENSE", squished: "SENSE", code: "VULCN"},
+        '98': {truncated: "VERSA", squished: "VRSA4", code: "HERA"},
+        '99': {truncated: "SENSE", squished: "SENS2", code: "RHEA"}
+    }
+
+    const modelNum = device.modelId
+    const format = simpleSettings.getDateFmt();
+    switch (format) {
+        case '1':
+            return models[modelNum].truncated;
+    
+        case '2':
+            return models[modelNum].squished;
+
+        case '3':
+        default:
+            return models[modelNum].code;
+    }
+
 }

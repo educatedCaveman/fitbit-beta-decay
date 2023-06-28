@@ -61,6 +61,7 @@ function mySettings(props) {
             {name:"Glitch", value: "1"},
             {name:"Time", value: "2"},
             {name:"Date", value: "3"},
+            {name:"Model", value: "4"}
             {name:"None", value: "99"}
           ]}
           // {"values":[{"name":"Glitch","value":"1"}],"selected":[0]}
@@ -85,6 +86,23 @@ function mySettings(props) {
             {name:"FRI13", value:"10"},
             {name:"13Fri", value:"11"},
             {name:"13FRI", value:"12"}
+          ]}
+          onSelection={(fmtSelection) => props.settingsStorage.setItem('dateFmt', fmtSelection.values[0].value)}
+        />
+
+        {/* trying to hide the toggle when the complication isn't the model */}
+        {/* { JSON.parse(settings.toggle || 'false') && <TextInput label="Truncate Model" settingsKey="modelTruncate"/> } */}
+        {/* { JSON.parse(props.settingsStorage.getItem('complication')).values[0].value != "4" && <TextInput label="Truncate Model" settingsKey="modelTruncate"/> } */}
+
+        <Select
+          label='Model Name Format'
+          selectViewTitle='Model Format'
+          settingsKey='modelFmt'
+          disabled={JSON.parse(props.settingsStorage.getItem('complication')).values[0].value != "4"}
+          options={[
+            {name:"Truncated - e.g. \"VERSA\" for a Versa 3", value:"1"},
+            {name:"Squished - e.g. \"VRSA3\" for a Versa 3", value:"2"},
+            {name:"Codename - e.g. \"ATLAS\" for a Versa 3", value:"3"}
           ]}
           onSelection={(fmtSelection) => props.settingsStorage.setItem('dateFmt', fmtSelection.values[0].value)}
         />

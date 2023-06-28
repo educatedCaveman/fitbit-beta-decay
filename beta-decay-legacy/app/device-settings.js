@@ -55,3 +55,13 @@ export function getDateFmt() {
     }
     return settingsVal
 }
+
+export function getModelTruncation() {
+    let settingsVal = false;
+    try {
+        settingsVal = settings['modelFmt'].values[0].value
+    } catch (ex) {
+        // do nothing
+    }
+    return settingsVal
+}
