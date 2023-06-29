@@ -61,7 +61,7 @@ function mySettings(props) {
             {name:"Glitch", value: "1"},
             {name:"Time", value: "2"},
             {name:"Date", value: "3"},
-            {name:"Model", value: "4"}
+            {name:"Model", value: "4"},
             {name:"None", value: "99"}
           ]}
           // {"values":[{"name":"Glitch","value":"1"}],"selected":[0]}
