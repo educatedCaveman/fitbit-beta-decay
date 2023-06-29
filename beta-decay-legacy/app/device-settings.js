@@ -65,3 +65,13 @@ export function getModelTruncation() {
     }
     return settingsVal
 }
+
+export function getSettingsVal(settingsKey) {
+    let settingsVal;
+    try {
+        settingsVal = settings[settingsKey].values[0].value
+    } catch (ex) {
+        // do nothing
+    }
+    return settingsVal
+}

@@ -104,7 +104,7 @@ function mySettings(props) {
             {name:"Squished - e.g. \"VRSA3\" for a Versa 3", value:"2"},
             {name:"Codename - e.g. \"ATLAS\" for a Versa 3", value:"3"}
           ]}
-          onSelection={(fmtSelection) => props.settingsStorage.setItem('dateFmt', fmtSelection.values[0].value)}
+          onSelection={(fmtSelection) => props.settingsStorage.setItem('modelFmt', fmtSelection.values[0].value)}
         />
 
       </Section>

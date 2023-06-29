@@ -182,7 +182,8 @@ function generateModelStr() {
     }
 
     const modelNum = device.modelId
-    const format = simpleSettings.getDateFmt();
+    // const format = simpleSettings.getDateFmt();
+    const format = simpleSettings.getSettingsVal('modelFmt');
     switch (format) {
         case '1':
             return models[modelNum].truncated;
