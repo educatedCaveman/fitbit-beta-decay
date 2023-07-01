@@ -8,6 +8,7 @@
     - [None](#none)
     - [Time](#time-1)
     - [Date](#date)
+    - [Model](#model)
     - [Upcoming](#upcoming)
 - [Background](#background)
 - [Licensing](#licensing)
@@ -19,6 +20,7 @@
   - [Local settings location](#local-settings-location)
   - [Setup](#setup)
     - [Generate Fonts](#generate-fonts)
+    - [Setup for Sideloading](#setup-for-sideloading)
 
 
 # Features
@@ -61,11 +63,15 @@ Self explanatory.  The format is configurable within the Date Format menu.  I th
 
 ![glitch](screenshots/date_DOWdd_lower.png)
 
+### Model
+The detected model.  Configurable to truncated, squished, or codename.  Truncated cuts off anything after the 5th character; e.g., A Versa 3 would show `VERSA`.  Squished will reformat the name, including revision to fit inside 5 characters; e.g., Sense 2 would show `VRSA3`.  Codename is the internal Codename FitBit uses for the model; e.g., Versa 3 is `ATLAS`.
+
+![model](screenshots/model_ID.png)
+
 ### Upcoming
 
 - [ ] Altitude
 - [ ] Weather
-- [ ] Model
 - [ ] Main Goal Progress
 - [ ] Time to Sunset/Sunrise
 
