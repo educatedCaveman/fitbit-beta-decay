@@ -15,6 +15,6 @@ export function padString(val, len, pad) {
 
     // format the value
     const valFmt = String(paddedString + val).slice(-len)
-    
+
     return valFmt
 }

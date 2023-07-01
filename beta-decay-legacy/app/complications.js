@@ -30,7 +30,12 @@ export function getCompText(compType, tickEvent) {
         case "4":
             compText = generateModelStr();
             break;
-    
+
+        // Sunset-Sunrise
+        case "5":
+            compText = generateSunStr();
+            break;
+
         // glitch (default)
         case "1":
             compText = generateGlitchTxt();
@@ -38,7 +43,7 @@ export function getCompText(compType, tickEvent) {
 
         default:
             compText = generateGlitchTxt();
-            
+
     }
     return compText;
 }
@@ -105,7 +110,7 @@ function generateDateStr(tickEvent) {
         case "8":
             monthFmt = monthFmt.toUpperCase();
             break;
-        
+
         // FRI13 or 13FRI
         case "10":
         case "12":
@@ -144,23 +149,23 @@ function generateDateStr(tickEvent) {
             break;
 
         // dd-mm
-        case "4":            
+        case "4":
             dateStr = String(numericDay + "-" + numericMonth);
             break;
 
         // dd/mm
-        case "3":            
+        case "3":
             dateStr = String(numericDay + "/" + numericMonth);
             break;
 
         // mm-dd
-        case "2":            
+        case "2":
             dateStr = String(numericMonth + "-" + numericDay);
             break;
 
         // mm/dd, default
         case "1":
-        default:           
+        default:
             dateStr = String(numericMonth + "/" + numericDay);
             break;
     }
@@ -175,10 +180,10 @@ function generateModelStr() {
 
     // TODO: need to wait for versa 4 and sense 2 model info
     const models = {
-        '36': {truncated: "VERSA", squished: "VRSA3", code: "ATLAS"},
-        '44': {truncated: "SENSE", squished: "SENSE", code: "VULCN"},
-        '98': {truncated: "VERSA", squished: "VRSA4", code: "HERA"},
-        '99': {truncated: "SENSE", squished: "SENS2", code: "RHEA"}
+        '36': { truncated: "VERSA", squished: "VRSA3", code: "ATLAS" },
+        '44': { truncated: "SENSE", squished: "SENSE", code: "VULCN" },
+        '98': { truncated: "VERSA", squished: "VRSA4", code: "HERA" },
+        '99': { truncated: "SENSE", squished: "SENS2", code: "RHEA" }
     }
 
     const modelNum = device.modelId
@@ -186,7 +191,7 @@ function generateModelStr() {
     switch (format) {
         case '1':
             return models[modelNum].truncated;
-    
+
         case '2':
             return models[modelNum].squished;
 
@@ -195,4 +200,8 @@ function generateModelStr() {
             return models[modelNum].code;
     }
 
+}
+
+function generateSunStr() {
+    return "00:00";
 }

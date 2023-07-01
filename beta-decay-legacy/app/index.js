@@ -66,7 +66,7 @@ function settingsCallback(data) {
 
     // text background opacity
     if (data.opacityTextBackground) {
-        textBG.style.fillOpacity = data.opacityTextBackground/100;
+        textBG.style.fillOpacity = data.opacityTextBackground / 100;
     }
 
     // background color
@@ -78,6 +78,6 @@ function settingsCallback(data) {
     if (data.colorLabel) {
         label.style.fill = data.colorLabel;
     }
-    
+
 }
 simpleSettings.initialize(settingsCallback);
