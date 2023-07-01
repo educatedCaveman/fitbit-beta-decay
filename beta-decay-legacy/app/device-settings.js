@@ -13,28 +13,34 @@ export function initialize(callback) {
     onsettingschange(settings);
 }
 
+
 // Received message containing settings data
 messaging.peerSocket.addEventListener("message", function (evt) {
     settings[evt.data.key] = evt.data.value;
     onsettingschange(settings);
 })
 
+
 // Register for the unload event
 me.addEventListener("unload", saveSettings);
+
 
 // Load settings from filesystem
 function loadSettings() {
     try {
+        console.log('loading settings')
         return fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
     } catch (ex) {
         return {};
     }
 }
 
+
 // Save settings to the filesystem
 function saveSettings() {
     fs.writeFileSync(SETTINGS_FILE, settings, SETTINGS_TYPE);
 }
+
 
 export function getCompType() {
     let settingsVal = "1";
@@ -46,6 +52,7 @@ export function getCompType() {
     return settingsVal
 }
 
+
 export function getDateFmt() {
     let settingsVal = "1";
     try {
@@ -56,6 +63,7 @@ export function getDateFmt() {
     return settingsVal
 }
 
+
 export function getModelTruncation() {
     let settingsVal = false;
     try {
@@ -65,6 +73,7 @@ export function getModelTruncation() {
     }
     return settingsVal
 }
+
 
 export function getSettingsVal(settingsKey) {
     let settingsVal;
