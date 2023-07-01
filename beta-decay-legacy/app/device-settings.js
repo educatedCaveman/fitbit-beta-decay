@@ -5,7 +5,18 @@ import * as messaging from "messaging";
 const SETTINGS_TYPE = "cbor";
 const SETTINGS_FILE = "settings.cbor";
 
-let settings, onsettingschange;
+// let settings, onsettingschange;
+let settings = {
+    "complication":             "1",
+    "dateFmt":                  "1",
+    "modelFmt":                 "3",
+    "colorText":                "gold",
+    "opacityTextBackground":    35,
+    "colorTextBackground":      "fb-extra-dark-gray",
+    "colorBackground":          "black",
+    "colorLabel":               "lightgray"
+};
+let onsettingschange;
 
 export function initialize(callback) {
     settings = loadSettings();
@@ -27,12 +38,16 @@ me.addEventListener("unload", saveSettings);
 
 // Load settings from filesystem
 function loadSettings() {
+    let loadedSettings = settings;
     try {
-        console.log('loading settings')
-        return fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
+        // return fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
+        loadedSettings = fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
     } catch (ex) {
-        return {};
+        // return {};
+        saveSettings();
+        // return settings;
     }
+    return loadedSettings;
 }
 
 

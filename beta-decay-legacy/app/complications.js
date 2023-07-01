@@ -27,7 +27,7 @@ export function getCompText(compType, tickEvent) {
             break;
 
         // Model
-        case "3":
+        case "4":
             compText = generateModelStr();
             break;
     
@@ -174,7 +174,7 @@ function generateModelStr() {
     // device.modelName is like sense or versa
 
     // TODO: need to wait for versa 4 and sense 2 model info
-    models = {
+    const models = {
         '36': {truncated: "VERSA", squished: "VRSA3", code: "ATLAS"},
         '44': {truncated: "SENSE", squished: "SENSE", code: "VULCN"},
         '98': {truncated: "VERSA", squished: "VRSA4", code: "HERA"},
@@ -182,7 +182,6 @@ function generateModelStr() {
     }
 
     const modelNum = device.modelId
-    // const format = simpleSettings.getDateFmt();
     const format = simpleSettings.getSettingsVal('modelFmt');
     switch (format) {
         case '1':
