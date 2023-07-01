@@ -10,7 +10,8 @@ export function initialize() {
 }
 
 function sendValue(key, val) {
-  if (val) {
+  if (key && val) {
+  // if (val) {
     sendSettingData({
       key: key,
       value: JSON.parse(val)

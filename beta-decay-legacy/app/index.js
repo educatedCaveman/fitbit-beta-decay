@@ -3,6 +3,7 @@ import * as drawText from "./draw-text"
 import * as nonClock from "./clock"
 import * as heartRateMon from "./hrm"
 import * as simpleSettings from "./device-settings";
+import * as location from "./device-location";
 
 
 /* --------- Document/UI elements ---------- */
@@ -81,3 +82,6 @@ function settingsCallback(data) {
 
 }
 simpleSettings.initialize(settingsCallback);
+
+/* -------- Location -------- */
+location.initialize();

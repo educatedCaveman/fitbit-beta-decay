@@ -36,22 +36,22 @@ function saveSettings() {
     fs.writeFileSync(SETTINGS_FILE, settings, SETTINGS_TYPE);
 }
 
-export function getCompType() {
-    let settingsVal = "1";
-    try {
-        settingsVal = settings['complication'].values[0].value
-    } catch (ex) {
-        // do nothing
-    }
-    return settingsVal
-}
+// export function getCompType() {
+//     let settingsVal = "1";
+//     try {
+//         settingsVal = settings['complication'].values[0].value
+//     } catch (ex) {
+//         // do nothing
+//     }
+//     return settingsVal
+// }
 
-export function getDateFmt() {
-    let settingsVal = "1";
-    try {
-        settingsVal = settings['dateFmt'].values[0].value
-    } catch (ex) {
-        // do nothing
-    }
-    return settingsVal
-}
+// export function getDateFmt() {
+//     let settingsVal = "1";
+//     try {
+//         settingsVal = settings['dateFmt'].values[0].value
+//     } catch (ex) {
+//         // do nothing
+//     }
+//     return settingsVal
+// }

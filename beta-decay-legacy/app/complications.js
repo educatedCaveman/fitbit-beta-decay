@@ -2,6 +2,9 @@ import { preferences } from "user-settings";
 import * as utils from "./utils";
 import * as simpleSettings from "./device-settings";
 import { me as device } from "device";
+// import { geolocation } from "geolocation";
+import * as location from "./device-location";
+
 
 const allChars = "\"!#$%&'()*+,-./1234567890:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¥¦¨©«®°±²³´¶¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ‐–—‘’“”…█"
 const asciiExtended = " !\"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ"
@@ -33,7 +36,7 @@ export function getCompText(compType, tickEvent) {
 
         // Sunset-Sunrise
         case "5":
-            compText = generateSunStr();
+            compText = generateSunStr(tickEvent);
             break;
 
         // glitch (default)
@@ -103,7 +106,7 @@ function generateDateStr(tickEvent) {
     let numericMonth = utils.padString(String(rawMonth + 1), 2, "0");
 
     // normalize the day or month format    
-    const dateFmt = simpleSettings.getDateFmt();
+    const dateFmt = simpleSettings.getSettingsVal('dateFmt');
     switch (dateFmt) {
         // OCT31 or 31OCT
         case "6":
@@ -202,6 +205,74 @@ function generateModelStr() {
 
 }
 
-function generateSunStr() {
-    return "00:00";
+
+function getTimeDiff(time1, time2) {
+    const tmp1 = time1.split(":")
+    const tmp2 = time2.split(":")
+
+    // convert time strings to minute of the day
+    let time1_m = parseInt(tmp1[0]) * 60 + parseInt(tmp1[1]);
+    let time2_m = parseInt(tmp2[0]) * 60 + parseInt(tmp2[1]);
+
+    // case 1: time1 is after time2 -- do nothing
+    // case 2: time1 is before time2 (sunrise the next day)-- add 24h
+    if (time1_m <= time2_m) { time1_m + (24 * 60) };
+
+    const diff_m = time1_m - time2_m;
+
+    const hours = parseInt(diff_m / 60);
+    const mins = parseInt((diff_m - (60 * hours)));
+    // console.log("hours: " + hours + ", mins: " + mins);
+
+    const hrStr = utils.padString(hours, 2, "0");
+    const minStr = utils.padString(mins, 2, "0");
+    
+    return String(hrStr + ":" + minStr);
+}
+
+
+function generateSunStr(tickEvent) {
+    // geolocation.getCurrentPosition(function(position) {
+    //    console.log(position.coords.latitude + ", " + position.coords.longitude);
+    // })
+    //baltimore: 39.29, -76.61
+
+    const hours = utils.padString(tickEvent.date.getHours(), 2, "0");
+    const mins = utils.padString(tickEvent.date.getMinutes(), 2, "0");
+
+    const currentTime = String(hours + ":" + mins);
+
+    // TODO: rewrite to not need current time?
+    const sunData = location.getSunData(currentTime, tickEvent);
+    // console.log(JSON.stringify(sunData));
+    let sunrise, sunset;
+
+    // handle initialization lag
+    if (sunData === undefined || sunData.sunrise === undefined || sunData.sunset === undefined) {
+        return "--:--"
+    } else {
+        sunrise = sunData.sunrise;
+        sunset = sunData.sunset;
+    }
+
+
+    // handle nulls (should only be for the poles)
+    if (sunrise === null || sunset === null) { return "POLAR" }
+
+    //determine which time to comare against
+    //TODO: figure out how to get the next day's sunrise when after sunset
+    if (currentTime >= sunrise && currentTime < sunset) {
+        // between sunrise and sunset
+        return getTimeDiff(sunset, currentTime);
+
+    } else {        
+        // after sunset
+        // before sunrise
+        return getTimeDiff(sunrise, currentTime);
+    }
+
+
+    // TODO: determine if the returned times are AM or PM
+
+    return "--:--";
 }

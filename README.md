@@ -9,6 +9,7 @@
     - [Time](#time-1)
     - [Date](#date)
     - [Model](#model)
+    - [Time to Sunset or Sunrise](#time-to-sunset-or-sunrise)
     - [Upcoming](#upcoming)
 - [Background](#background)
 - [Licensing](#licensing)
@@ -67,6 +68,9 @@ Self explanatory.  The format is configurable within the Date Format menu.  I th
 The detected model.  Configurable to truncated, squished, or codename.  Truncated cuts off anything after the 5th character; e.g., A Versa 3 would show `VERSA`.  Squished will reformat the name, including revision to fit inside 5 characters; e.g., Sense 2 would show `VRSA3`.  Codename is the internal Codename FitBit uses for the model; e.g., Versa 3 is `ATLAS`.
 
 ![model](screenshots/model_ID.png)
+
+### Time to Sunset or Sunrise
+Powered by [SunriseSunset.io](SunriseSunset.io).
 
 ### Upcoming
 

@@ -49,6 +49,8 @@ const colorSet = [
   {color: "red"}       
 ];
 
+const dummy = {"values": ["0"]}
+
 
 function mySettings(props) {
   return (
@@ -59,17 +61,17 @@ function mySettings(props) {
           selectViewTitle="Complication"
           settingsKey="complication"
           options={[
-            {name:"Glitch",   value: "1"},
-            {name:"Time",     value: "2"},
-            {name:"Date",     value: "3"},
-            {name:"Model",    value: "4"},
-            {name:"None",     value: "99"}
+            {name:"Glitch",         value: "1"},
+            {name:"Time",           value: "2"},
+            {name:"Date",           value: "3"},
+            {name:"Model",          value: "4"},
+            {name:"Sunset/Sunrise", value: "5"},
+            {name:"None",           value: "99"}
           ]}
           onSelection={(selection) => props.settingsStorage.setItem('complication', selection.values[0].value)}
         />
-
         {/* Show/Hide the extra options for the Date Complication */}
-        { JSON.parse(props.settingsStorage.getItem('complication')).values[0].value === "3" &&
+        { (JSON.parse(props.settingsStorage.getItem('complication') ?? JSON.stringify(dummy))).values[0].value === "3" &&
           <Select
             label='Date Format'
             selectViewTitle='Format'
@@ -91,9 +93,8 @@ function mySettings(props) {
             onSelection={(fmtSelection) => props.settingsStorage.setItem('dateFmt', fmtSelection.values[0].value)}
           />
         }
-
         {/* Show/Hide the extra options for the Model Complication */}
-        { JSON.parse(props.settingsStorage.getItem('complication')).values[0].value === "4" &&
+        { (JSON.parse(props.settingsStorage.getItem('complication') ?? JSON.stringify(dummy))).values[0].value === "4" &&
           <Select
             label='Format'
             selectViewTitle='Model Format'
@@ -106,11 +107,24 @@ function mySettings(props) {
             onSelection={(fmtSelection) => props.settingsStorage.setItem('modelFmt', fmtSelection.values[0].value)}
           />
         }
-
+        {/* Show/Hide the extra options for the Sun Times Complication */}
+        { (JSON.parse(props.settingsStorage.getItem('complication') ?? JSON.stringify(dummy))).values[0].value === "5" &&
+          <Slider
+          label={String("Refresh Interval: " + props.settingsStorage.getItem('sunInterval') + "h")}
+            selectViewTitle='Refresh Interval'
+            settingsKey='sunInterval'
+            min="1" max="12" step="1"
+            onSelection={(fmtSelection) => props.settingsStorage.setItem('sunInterval', fmtSelection.values[0].value)}
+          />
+        }
       </Section>
+
+
       <Section title="Text Color">
         <ColorSelect settingsKey="colorText" colors={colorSet} />
       </Section>
+
+
       <Section title="Text Background Color">
         <Slider 
           label={String("Opactity: " + props.settingsStorage.getItem('opacityTextBackground') + "%")}
@@ -120,12 +134,18 @@ function mySettings(props) {
         />
         <ColorSelect settingsKey="colorTextBackground" colors={colorSet} />
       </Section>
+
+
       <Section title="Background Color">
         <ColorSelect settingsKey="colorBackground" colors={colorSet} />
       </Section>
+
+
       <Section title="Label Color">
         <ColorSelect settingsKey="colorLabel" colors={colorSet} />
       </Section>
+
+
       <Section>
         <Button
           list
