@@ -74,7 +74,7 @@ function settingsCallback(data) {
         background.style.fill = data.colorBackground;
     }
 
-    // lable color
+    // label color
     if (data.colorLabel) {
         label.style.fill = data.colorLabel;
     }
