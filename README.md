@@ -164,7 +164,7 @@ To crispen the images, reducing them to purely black/white, run the following co
         export FITBIT_QA_COMMANDS=1
         yarn debug
 
-5. manually run the following commands on the `fitbot$` prompt:
+5. manually run the following commands on the `fitbt$` prompt:
 
         hosts
         connect phone

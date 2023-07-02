@@ -11,12 +11,10 @@ let textBG = document.getElementById("text_bg");
 let text = document.getElementById("foreground");
 let label = document.getElementById("label");
 
-/* --------- Complication ---------- */
-// default to glitch
-let complication = "1";
 
 /* --------- DRAW BACKGROUND ---------- */
 drawText.drawBackground();
+
 
 /* --------- CLOCK ---------- */
 // steps, battery level, and extra thingy
@@ -42,16 +40,12 @@ function hrmCallback(data) {
 }
 heartRateMon.initialize(hrmCallback);
 
+
 /* -------- SETTINGS -------- */
 function settingsCallback(data) {
     // handle no data
     if (!data) {
         return;
-    }
-
-    // complication
-    if (data.complication) {
-        complication = data.complication;
     }
 
     // text color
@@ -66,7 +60,7 @@ function settingsCallback(data) {
 
     // text background opacity
     if (data.opacityTextBackground) {
-        textBG.style.fillOpacity = data.opacityTextBackground/100;
+        textBG.style.fillOpacity = data.opacityTextBackground / 100;
     }
 
     // background color
@@ -74,10 +68,10 @@ function settingsCallback(data) {
         background.style.fill = data.colorBackground;
     }
 
-    // lable color
+    // label color
     if (data.colorLabel) {
         label.style.fill = data.colorLabel;
     }
-    
+
 }
 simpleSettings.initialize(settingsCallback);
