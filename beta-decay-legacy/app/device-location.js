@@ -1,64 +1,41 @@
 import * as messaging from "messaging";
-// import * as simpleSettings from "./device-settings";
 import * as utils from "./utils";
 
 let sunData;
 
 
+export function updateSunData() {
+    // console.log("updateSunData() called")
+    fetchSuntime();
+}
+
+
 export function getSunData() {
+    // sunData being undefined is handled in the complication code.
     if (sunData === undefined) {
         fetchSuntime();
     }
     return sunData;
 }
 
-export function initialize() {
-    fetchSuntime();
-}
 
-function fetchSuntime() {
+function fetchSuntime() {    
+    // console.log("fetchSuntime() called")
+    // console.log(JSON.stringify(sunData))
     if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
         // Send a command to the companion
+        // console.log('about to send message')
         messaging.peerSocket.send({
             command: "sunset_sunrise"
         });
+        // console.log('sent message')
     }
 }
 
-function convertAMPM(timeStr) {
-    // assumes time is in a format like "9:18:48 PM"
-    // note no leading 0's for the hour
-    // note it uses AM/PM
-
-    // handle null
-    if (timeStr === null) { return timeStr };
-
-    // parse the input value
-    let hour, min;
-    const time = timeStr.split(":");
-    hour = utils.padString(time[0], 2, "0");
-    min = utils.padString(time[1], 2, "0");
-
-    // handle PM
-    let pm = false;
-    if (timeStr.slice(-2) === "PM") {
-        pm = true;
-    }
-    if (pm) {
-        hour = parseInt(hour) + 12;
-    }
-
-    // return formatted string
-    return String(hour + ":" + min);
-}
 
 function processSunData(data) {
-    //   console.log(`The temperature is: ${data.temperature}`);
-    console.log("companion location data: " + JSON.stringify(data));
-
-    let sunrise = convertAMPM(data.sunrise);
-    let sunset = convertAMPM(data.sunset);
-
+    let sunrise = utils.convertAMPM24h(data.sunrise);
+    let sunset = utils.convertAMPM24h(data.sunset);
     sunData = { "sunrise": sunrise, "sunset": sunset };
 }
 
@@ -67,7 +44,7 @@ messaging.peerSocket.addEventListener("open", (evt) => {
 });
 
 messaging.peerSocket.addEventListener("message", (evt) => {
-    if (evt.data) {
+    if (evt.data && evt.data.sunrise && evt.data.sunset) {
         processSunData(evt.data);
     }
 });
@@ -75,19 +52,3 @@ messaging.peerSocket.addEventListener("message", (evt) => {
 messaging.peerSocket.addEventListener("error", (err) => {
     console.error(`Connection error: ${err.code} - ${err.message}`);
 });
-
-// Fetch the weather every 30 minutes
-// note: this is the amount if miliseconds
-// setInterval(fetchSuntime, 30 * 1000 * 60);
-
-// this converts hours to miliseconds
-// setInterval(fetchSuntime, 1000 * 3600 * simpleSettings.getSettingsVal('sunInterval'));
-// setInterval(fetchSuntime, 60000);
-setInterval(fetchSuntime, 10000);
-
-
-// TODO: do i fetch the info on a schedule here, as above
-// TODO: or do i have a getter function here that the complication can take advantage of?
-
-// i think i like the second.
-// TODO: but i think i should have an update frequency.

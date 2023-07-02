@@ -15,12 +15,13 @@ const defaults = {
     "colorTextBackground": "fb-extra-dark-gray",
     "colorBackground": "black",
     "colorLabel": "lightgray",
-    "sunInterval": 4
+    "sunInterval": 1,
+    "queryPolitely": true
 };
 
 export function initialize(callback) {
     settings = loadSettings();
-    console.log(JSON.stringify(settings));
+    // console.log(JSON.stringify(settings));
     onsettingschange = callback;
     onsettingschange(settings);
 }
@@ -28,15 +29,13 @@ export function initialize(callback) {
 
 // Received message containing settings data
 messaging.peerSocket.addEventListener("message", function (evt) {
-    console.log("companion settings data: " + JSON.stringify(evt))
 
     // TODO: this needs rewriting
+    // or does it?
 
     if (settings === undefined) {
         settings = defaults;
     } else if (evt.data === undefined) {
-        // do nothing
-        // this message is not for us
         return;
     }
 
@@ -53,15 +52,9 @@ me.addEventListener("unload", saveSettings);
 function loadSettings() {
     let loadedSettings = defaults;
     try {
-        // return fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
-        console.log('trying to load settings')
         loadedSettings = fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
-        console.log('loaded settings')
     } catch (ex) {
-        // return {};
-        console.log('using default settings')
         saveSettings();
-        // return settings;
     }
     return loadedSettings;
 }
@@ -78,7 +71,7 @@ export function getSettingsVal(settingsKey) {
     try {
         settingsVal = settings[settingsKey].values[0].value
     } catch (ex) {
-        // do nothing
+        settingsVal = defaults[settingsKey]
     }
     return settingsVal
 }

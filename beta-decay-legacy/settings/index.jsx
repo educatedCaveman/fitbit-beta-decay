@@ -109,12 +109,24 @@ function mySettings(props) {
         }
         {/* Show/Hide the extra options for the Sun Times Complication */}
         {(JSON.parse(props.settingsStorage.getItem('complication') ?? JSON.stringify(dummy))).values[0].value === "5" &&
-          <Slider
-            label={String("Refresh Interval: " + props.settingsStorage.getItem('sunInterval') + "h")}
+          <Toggle
+            settingsKey="queryPolitely"
+            label="Be Polite?"
+            onChange={(polite) => props.settingsStorage.setItem('queryPolitely', JSON.stringify(polite))}
+          />
+        }
+        {(JSON.parse(props.settingsStorage.getItem('complication') ?? JSON.stringify(dummy))).values[0].value === "5" &&
+          <Select
+            label="Refresh Interval"
             selectViewTitle='Refresh Interval'
             settingsKey='sunInterval'
-            min="1" max="12" step="1"
-            onSelection={(fmtSelection) => props.settingsStorage.setItem('sunInterval', fmtSelection.values[0].value)}
+            options={[
+              { name: "30 minutes", value: "0" },
+              { name: "1 hour", value: "1" },
+              { name: "2 hours", value: "2" },
+              { name: "3 hours", value: "3" }
+            ]}
+            onSelection={(selection) => props.settingsStorage.setItem('sunInterval', selection.values[0].value)}
           />
         }
       </Section>
@@ -150,7 +162,15 @@ function mySettings(props) {
         <Button
           list
           label="Reset Settings"
-          onClick={() => props.settingsStorage.clear()}
+          onClick={() => {
+            props.settingsStorage.clear()
+            props.settingsStorage.setItem('complication', JSON.stringify({ "values": [{ "name": "Glitch", "value": "1" }], "selected": [0] }))
+            props.settingsStorage.setItem('colorText', JSON.stringify("yellow"))
+            props.settingsStorage.setItem('opacityTextBackground', JSON.stringify(35))
+            props.settingsStorage.setItem('colorTextBackground', JSON.stringify("fb-extra-dark-gray"))
+            props.settingsStorage.setItem('colorBackground', JSON.stringify("black"))
+            props.settingsStorage.setItem('colorLabel', JSON.stringify("lightgrey"))
+          }}
         />
       </Section>
     </Page>

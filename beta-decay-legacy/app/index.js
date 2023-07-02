@@ -3,7 +3,6 @@ import * as drawText from "./draw-text"
 import * as nonClock from "./clock"
 import * as heartRateMon from "./hrm"
 import * as simpleSettings from "./device-settings";
-import * as location from "./device-location";
 
 
 /* --------- Document/UI elements ---------- */
@@ -12,12 +11,10 @@ let textBG = document.getElementById("text_bg");
 let text = document.getElementById("foreground");
 let label = document.getElementById("label");
 
-/* --------- Complication ---------- */
-// default to glitch
-let complication = "1";
 
 /* --------- DRAW BACKGROUND ---------- */
 drawText.drawBackground();
+
 
 /* --------- CLOCK ---------- */
 // steps, battery level, and extra thingy
@@ -43,16 +40,12 @@ function hrmCallback(data) {
 }
 heartRateMon.initialize(hrmCallback);
 
+
 /* -------- SETTINGS -------- */
 function settingsCallback(data) {
     // handle no data
     if (!data) {
         return;
-    }
-
-    // complication
-    if (data.complication) {
-        complication = data.complication;
     }
 
     // text color
@@ -82,6 +75,3 @@ function settingsCallback(data) {
 
 }
 simpleSettings.initialize(settingsCallback);
-
-/* -------- Location -------- */
-location.initialize();

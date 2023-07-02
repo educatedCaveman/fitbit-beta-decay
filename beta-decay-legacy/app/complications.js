@@ -8,7 +8,7 @@ import * as location from "./device-location";
 
 const allChars = "\"!#$%&'()*+,-./1234567890:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¥¦¨©«®°±²³´¶¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ‐–—‘’“”…█"
 const asciiExtended = " !\"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ"
-
+const requestOffset = parseInt(Math.random() * 11);
 
 export function getCompText(compType, tickEvent) {
     let compText = String("");
@@ -176,7 +176,6 @@ function generateDateStr(tickEvent) {
 }
 
 function generateModelStr() {
-    // TODO: get setting for which to show
     // https://dev.fitbit.com/build/reference/device-api/device/
     // device.type is like hera or rhea
     // device.modelName is like sense or versa
@@ -222,7 +221,6 @@ function getTimeDiff(time1, time2) {
 
     const hours = parseInt(diff_m / 60);
     const mins = parseInt((diff_m - (60 * hours)));
-    // console.log("hours: " + hours + ", mins: " + mins);
 
     const hrStr = utils.padString(hours, 2, "0");
     const minStr = utils.padString(mins, 2, "0");
@@ -232,20 +230,39 @@ function getTimeDiff(time1, time2) {
 
 
 function generateSunStr(tickEvent) {
-    // geolocation.getCurrentPosition(function(position) {
-    //    console.log(position.coords.latitude + ", " + position.coords.longitude);
-    // })
-    //baltimore: 39.29, -76.61
+    let delay = requestOffset
+    const polite = simpleSettings.getSettingsVal('queryPolitely');
+    if (!polite) { delay = 0; }
+    const baseInterval = simpleSettings.getSettingsVal('sunInterval');
+    let interval;
+    if (baseInterval === 0) {
+        interval = 30
+    } else {
+        interval = baseInterval * 60;
+    }
+    // convert the tick event to the minute of the day, minus the delay
+    // this means the update happens delay minutes after the interval
+    const tickMins = utils.tickToMins(tickEvent, delay);
+    // update the data
+    if (tickMins % interval === 0) { location.updateSunData() }
+    // debug code
+    // TODO: remove eventually
+    // if (tickEvent.date.getSeconds() % 10 === 0) {
+    //     console.log('tick')
+    //     location.updateSunData()
+    // } else {
+    //     console.log('tock')
+    // }
+    
 
+
+    // return either new or saved data
     const hours = utils.padString(tickEvent.date.getHours(), 2, "0");
     const mins = utils.padString(tickEvent.date.getMinutes(), 2, "0");
-
     const currentTime = String(hours + ":" + mins);
-
-    // TODO: rewrite to not need current time?
     const sunData = location.getSunData();
-    // console.log(JSON.stringify(sunData));
     let sunrise, sunset;
+
 
     // handle initialization lag
     if (sunData === undefined || sunData.sunrise === undefined || sunData.sunset === undefined) {
@@ -255,24 +272,24 @@ function generateSunStr(tickEvent) {
         sunset = sunData.sunset;
     }
 
-
     // handle nulls (should only be for the poles)
-    if (sunrise === null || sunset === null) { return "POLAR" }
+    if (sunrise === null || sunset === null) { return "POLAR" }    
+    
+    //TODO: immediately after sunset, query again to get updated sunrise.
+    const currentMins = parseInt(hours) * 60 + parseInt(mins);
+    const sunTime = sunset.split(":");
+    const sunsetMins = parseInt(sunTime[0]) * 60 + parseInt(sunTime[1]);
+    const sunsetDiff = currentMins - sunsetMins;
+    if (sunsetDiff === 0 || sunsetDiff === 1) {location.updateSunData()};
 
     //determine which time to comare against
-    //TODO: figure out how to get the next day's sunrise when after sunset
     if (currentTime >= sunrise && currentTime < sunset) {
         // between sunrise and sunset
         return getTimeDiff(sunset, currentTime);
 
     } else {
-        // after sunset
-        // before sunrise
+        // after sunset or before sunrise
+        // NOTE: the API query handles returning the next day's sunrise, when the current time is after sunset
         return getTimeDiff(sunrise, currentTime);
     }
-
-
-    // TODO: determine if the returned times are AM or PM
-
-    return "--:--";
 }
