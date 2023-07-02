@@ -9,6 +9,7 @@
     - [Time](#time-1)
     - [Date](#date)
     - [Model](#model)
+    - [Time to Sunset or Sunrise](#time-to-sunset-or-sunrise)
     - [Upcoming](#upcoming)
 - [Background](#background)
 - [Licensing](#licensing)
@@ -68,12 +69,18 @@ The detected model.  Configurable to truncated, squished, or codename.  Truncate
 
 ![model](screenshots/model_ID.png)
 
+### Time to Sunset or Sunrise
+Does what it says on the tin.  Updates periodically; configurable from 30 minutes to 3 hours.  There may be a slight innacuracy immediately after sunset due to it using the current day's sunrise time instead of tomorrow's.  Within a minute or 2, it should re-query for it, and update itself.  This will be the most pronounced on the [biannual equinoxes](https://en.wikipedia.org/wiki/Equinox). (around March 20th, and September 23rd)
+
+Powered by [SunriseSunset.io](SunriseSunset.io).
+
+![sunset_sunrise](screenshots/sunset_sunrise.png)
+
 ### Upcoming
 
 - [ ] Altitude
 - [ ] Weather
 - [ ] Main Goal Progress
-- [ ] Time to Sunset/Sunrise
 
 
 # Background

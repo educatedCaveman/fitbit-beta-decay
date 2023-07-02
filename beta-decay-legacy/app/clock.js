@@ -16,12 +16,12 @@ export function initialize(granularity, callback) {
 function tickHandler(evt) {
 
     // handle complication
-    let compType = simpleSettings.getCompType();
+    let compType = simpleSettings.getSettingsVal('complication');
     let compText = complication.getCompText(compType, evt);
 
     // callback
-    clockCallback({ 
-        steps: steps.getFormattedSteps(), 
+    clockCallback({
+        steps: steps.getFormattedSteps(),
         batt: String(battery.chargeLevel + "%"),
         comp: compText,
     });

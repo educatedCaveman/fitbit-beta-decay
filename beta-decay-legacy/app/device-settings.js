@@ -5,21 +5,23 @@ import * as messaging from "messaging";
 const SETTINGS_TYPE = "cbor";
 const SETTINGS_FILE = "settings.cbor";
 
-// let settings, onsettingschange;
-let settings = {
-    "complication":             "1",
-    "dateFmt":                  "1",
-    "modelFmt":                 "3",
-    "colorText":                "gold",
-    "opacityTextBackground":    35,
-    "colorTextBackground":      "fb-extra-dark-gray",
-    "colorBackground":          "black",
-    "colorLabel":               "lightgray"
+let settings, onsettingschange;
+const defaults = {
+    "complication": "1",
+    "dateFmt": "1",
+    "modelFmt": "3",
+    "colorText": "gold",
+    "opacityTextBackground": 35,
+    "colorTextBackground": "fb-extra-dark-gray",
+    "colorBackground": "black",
+    "colorLabel": "lightgray",
+    "sunInterval": 1,
+    "queryPolitely": true
 };
-let onsettingschange;
 
 export function initialize(callback) {
     settings = loadSettings();
+    // console.log(JSON.stringify(settings));
     onsettingschange = callback;
     onsettingschange(settings);
 }
@@ -27,6 +29,16 @@ export function initialize(callback) {
 
 // Received message containing settings data
 messaging.peerSocket.addEventListener("message", function (evt) {
+
+    // TODO: this needs rewriting
+    // or does it?
+
+    if (settings === undefined) {
+        settings = defaults;
+    } else if (evt.data === undefined) {
+        return;
+    }
+
     settings[evt.data.key] = evt.data.value;
     onsettingschange(settings);
 })
@@ -38,14 +50,11 @@ me.addEventListener("unload", saveSettings);
 
 // Load settings from filesystem
 function loadSettings() {
-    let loadedSettings = settings;
+    let loadedSettings = defaults;
     try {
-        // return fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
         loadedSettings = fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
     } catch (ex) {
-        // return {};
         saveSettings();
-        // return settings;
     }
     return loadedSettings;
 }
@@ -57,45 +66,12 @@ function saveSettings() {
 }
 
 
-export function getCompType() {
-    let settingsVal = "1";
-    try {
-        settingsVal = settings['complication'].values[0].value
-    } catch (ex) {
-        // do nothing
-    }
-    return settingsVal
-}
-
-
-export function getDateFmt() {
-    let settingsVal = "1";
-    try {
-        settingsVal = settings['dateFmt'].values[0].value
-    } catch (ex) {
-        // do nothing
-    }
-    return settingsVal
-}
-
-
-export function getModelTruncation() {
-    let settingsVal = false;
-    try {
-        settingsVal = settings['modelFmt'].values[0].value
-    } catch (ex) {
-        // do nothing
-    }
-    return settingsVal
-}
-
-
 export function getSettingsVal(settingsKey) {
     let settingsVal;
     try {
         settingsVal = settings[settingsKey].values[0].value
     } catch (ex) {
-        // do nothing
+        settingsVal = defaults[settingsKey]
     }
     return settingsVal
 }

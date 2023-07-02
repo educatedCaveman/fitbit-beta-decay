@@ -17,7 +17,7 @@ export function initialize(callback) {
             start();
         } else {
             console.log("Denied Heart Rate or User Profile permissions");
-            callback({bpm: "???"});
+            callback({ bpm: "???" });
         }
 
         // display listener; turn off body presence
@@ -35,7 +35,7 @@ function getReading() {
     } else {
         heartRate = "--";
     }
-    hrmCallback({bpm: heartRate});
+    hrmCallback({ bpm: heartRate });
 }
 
 function setupEvents() {

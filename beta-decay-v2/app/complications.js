@@ -95,7 +95,7 @@ function generateDateStr(tickEvent) {
     let numericMonth = utils.padString(String(rawMonth + 1), 2, "0");
 
     // normalize the day or month format    
-    const dateFmt = simpleSettings.getDateFmt();
+    const dateFmt = simpleSettings.getSettingsVal('dateFmt');
     switch (dateFmt) {
         // OCT31 or 31OCT
         case "6":

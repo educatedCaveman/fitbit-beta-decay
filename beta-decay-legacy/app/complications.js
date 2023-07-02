@@ -2,10 +2,13 @@ import { preferences } from "user-settings";
 import * as utils from "./utils";
 import * as simpleSettings from "./device-settings";
 import { me as device } from "device";
+// import { geolocation } from "geolocation";
+import * as location from "./device-location";
+
 
 const allChars = "\"!#$%&'()*+,-./1234567890:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¥¦¨©«®°±²³´¶¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ‐–—‘’“”…█"
 const asciiExtended = " !\"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ"
-
+const requestOffset = parseInt(Math.random() * 11);
 
 export function getCompText(compType, tickEvent) {
     let compText = String("");
@@ -30,7 +33,12 @@ export function getCompText(compType, tickEvent) {
         case "4":
             compText = generateModelStr();
             break;
-    
+
+        // Sunset-Sunrise
+        case "5":
+            compText = generateSunStr(tickEvent);
+            break;
+
         // glitch (default)
         case "1":
             compText = generateGlitchTxt();
@@ -38,7 +46,7 @@ export function getCompText(compType, tickEvent) {
 
         default:
             compText = generateGlitchTxt();
-            
+
     }
     return compText;
 }
@@ -98,14 +106,14 @@ function generateDateStr(tickEvent) {
     let numericMonth = utils.padString(String(rawMonth + 1), 2, "0");
 
     // normalize the day or month format    
-    const dateFmt = simpleSettings.getDateFmt();
+    const dateFmt = simpleSettings.getSettingsVal('dateFmt');
     switch (dateFmt) {
         // OCT31 or 31OCT
         case "6":
         case "8":
             monthFmt = monthFmt.toUpperCase();
             break;
-        
+
         // FRI13 or 13FRI
         case "10":
         case "12":
@@ -144,23 +152,23 @@ function generateDateStr(tickEvent) {
             break;
 
         // dd-mm
-        case "4":            
+        case "4":
             dateStr = String(numericDay + "-" + numericMonth);
             break;
 
         // dd/mm
-        case "3":            
+        case "3":
             dateStr = String(numericDay + "/" + numericMonth);
             break;
 
         // mm-dd
-        case "2":            
+        case "2":
             dateStr = String(numericMonth + "-" + numericDay);
             break;
 
         // mm/dd, default
         case "1":
-        default:           
+        default:
             dateStr = String(numericMonth + "/" + numericDay);
             break;
     }
@@ -168,17 +176,16 @@ function generateDateStr(tickEvent) {
 }
 
 function generateModelStr() {
-    // TODO: get setting for which to show
     // https://dev.fitbit.com/build/reference/device-api/device/
     // device.type is like hera or rhea
     // device.modelName is like sense or versa
 
     // TODO: need to wait for versa 4 and sense 2 model info
     const models = {
-        '36': {truncated: "VERSA", squished: "VRSA3", code: "ATLAS"},
-        '44': {truncated: "SENSE", squished: "SENSE", code: "VULCN"},
-        '98': {truncated: "VERSA", squished: "VRSA4", code: "HERA"},
-        '99': {truncated: "SENSE", squished: "SENS2", code: "RHEA"}
+        '36': { truncated: "VERSA", squished: "VRSA3", code: "ATLAS" },
+        '44': { truncated: "SENSE", squished: "SENSE", code: "VULCN" },
+        '98': { truncated: "VERSA", squished: "VRSA4", code: "HERA" },
+        '99': { truncated: "SENSE", squished: "SENS2", code: "RHEA" }
     }
 
     const modelNum = device.modelId
@@ -186,7 +193,7 @@ function generateModelStr() {
     switch (format) {
         case '1':
             return models[modelNum].truncated;
-    
+
         case '2':
             return models[modelNum].squished;
 
@@ -195,4 +202,94 @@ function generateModelStr() {
             return models[modelNum].code;
     }
 
+}
+
+
+function getTimeDiff(time1, time2) {
+    const tmp1 = time1.split(":")
+    const tmp2 = time2.split(":")
+
+    // convert time strings to minute of the day
+    let time1_m = parseInt(tmp1[0]) * 60 + parseInt(tmp1[1]);
+    let time2_m = parseInt(tmp2[0]) * 60 + parseInt(tmp2[1]);
+
+    // case 1: time1 is after time2 -- do nothing
+    // case 2: time1 is before time2 (sunrise the next day)-- add 24h
+    if (time1_m <= time2_m) { time1_m + (24 * 60) };
+
+    const diff_m = time1_m - time2_m;
+
+    const hours = parseInt(diff_m / 60);
+    const mins = parseInt((diff_m - (60 * hours)));
+
+    const hrStr = utils.padString(hours, 2, "0");
+    const minStr = utils.padString(mins, 2, "0");
+
+    return String(hrStr + ":" + minStr);
+}
+
+
+function generateSunStr(tickEvent) {
+    let delay = requestOffset
+    const polite = simpleSettings.getSettingsVal('queryPolitely');
+    if (!polite) { delay = 0; }
+    const baseInterval = simpleSettings.getSettingsVal('sunInterval');
+    let interval;
+    if (baseInterval === 0) {
+        interval = 30
+    } else {
+        interval = baseInterval * 60;
+    }
+    // convert the tick event to the minute of the day, minus the delay
+    // this means the update happens delay minutes after the interval
+    const tickMins = utils.tickToMins(tickEvent, delay);
+    // update the data
+    if (tickMins % interval === 0) { location.updateSunData() }
+    // debug code
+    // TODO: remove eventually
+    // if (tickEvent.date.getSeconds() % 10 === 0) {
+    //     console.log('tick')
+    //     location.updateSunData()
+    // } else {
+    //     console.log('tock')
+    // }
+    
+
+
+    // return either new or saved data
+    const hours = utils.padString(tickEvent.date.getHours(), 2, "0");
+    const mins = utils.padString(tickEvent.date.getMinutes(), 2, "0");
+    const currentTime = String(hours + ":" + mins);
+    const sunData = location.getSunData();
+    let sunrise, sunset;
+
+
+    // handle initialization lag
+    if (sunData === undefined || sunData.sunrise === undefined || sunData.sunset === undefined) {
+        return "--:--"
+    } else {
+        sunrise = sunData.sunrise;
+        sunset = sunData.sunset;
+    }
+
+    // handle nulls (should only be for the poles)
+    if (sunrise === null || sunset === null) { return "POLAR" }    
+    
+    //TODO: immediately after sunset, query again to get updated sunrise.
+    const currentMins = parseInt(hours) * 60 + parseInt(mins);
+    const sunTime = sunset.split(":");
+    const sunsetMins = parseInt(sunTime[0]) * 60 + parseInt(sunTime[1]);
+    const sunsetDiff = currentMins - sunsetMins;
+    if (sunsetDiff === 0 || sunsetDiff === 1) {location.updateSunData()};
+
+    //determine which time to comare against
+    if (currentTime >= sunrise && currentTime < sunset) {
+        // between sunrise and sunset
+        return getTimeDiff(sunset, currentTime);
+
+    } else {
+        // after sunset or before sunrise
+        // NOTE: the API query handles returning the next day's sunrise, when the current time is after sunset
+        return getTimeDiff(sunrise, currentTime);
+    }
 }
