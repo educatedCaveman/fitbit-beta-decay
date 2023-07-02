@@ -17,27 +17,40 @@ import { geolocation } from "geolocation";
 var ENDPOINT = "https://api.sunrisesunset.io/json?";
 
 
-function querySunsetSunrise(lat, lon, timeStr, tick) {
+function querySunsetSunrise(lat, lon) {
+
+    // get next day based on current date
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const todayStr = today.toISOString().substring(0, 10);
+    const tomorrowStr = tomorrow.toISOString().substring(0, 10);
+    const hourStr = String("00" + today.getHours()).slice(-2);
+    const minsStr = String("00" + today.getMinutes()).slice(-2);
+    const now = String(hourStr + ":" + minsStr);
+
+
     // formattedURL = String(ENDPOINT + "lat=" + lat + "&lng=" + lon);
 
-    fetch(String(ENDPOINT + "lat=" + lat + "&lng=" + lon))
+    fetch(String(ENDPOINT + "lat=" + lat + "&lng=" + lon + "&date=" + todayStr))
         .then(function (response) {
             response.json()
                 .then(function (data) {
                     // console.log('fetching times')
-                    // TODO: handle getting the next day's sunrise
                     let sunrise = data["results"]["sunrise"];
                     let sunset = data["results"]["sunset"];
 
-                    // TODO: need to complete this function (figure out how to best get next date)
-                    // let fmtSunset = sunset.substring(0, sunset.length - 3);
-                    // if (fmtSunset > timeStr) {
-                    //     sunrise = querySunsetSunrise(lat, lon, tick)
-                    // }
-
+                    // TODO: handle getting the next day's sunrise
+                    // after sunset, we need the next day's sunrise
+                    let fmtSunrise = sunrise.substring(0, sunrise.length - 3);
+                    console.log("formatted sunrise1: " + fmtSunrise);
+                    console.log("current time: " + now);
+                    if (fmtSunrise < now) {
+                        sunrise = queryNextSunrise(lat, lon, tomorrowStr)
+                    }
 
                     console.log("sunrise: " + sunrise + ", sunset: " + sunset);
-                    data = {"sunrise": sunrise, "sunset": sunset};
+                    data = { "sunrise": sunrise, "sunset": sunset };
 
                     // Send the sun data to the device
                     returnSunData(data);
@@ -48,51 +61,17 @@ function querySunsetSunrise(lat, lon, timeStr, tick) {
         });
 }
 
-function padString(val, len, pad) {
-    // make sure the value to pad onto the input is defined.
-    // defaults to 0
-    if (pad === undefined) {
-        pad = "0";
-    }
 
-    // create the string to fill with
-    let paddedString = "";
-    for (let i = 0; i < len; i++) {
-        paddedString += pad;
-    }
-
-    // format the value
-    const valFmt = String(paddedString + val).slice(-len)
-
-    return valFmt
-}
-
-
-function queryNextSunrise(lat, lon, tick) {
-    // formattedURL = String(ENDPOINT + "lat=" + lat + "&lng=" + lon);
-
-    // TODO get next day based on input date
-    const today = new Date()
-    const tomorrow = new Date(today)
-    tomorrow.setDate(tomorrow.getDate() + 1)
-
-    fetch(String(ENDPOINT + "lat=" + lat + "&lng=" + lon + "&date=" + ))
+function queryNextSunrise(lat, lon, tomorrow) {
+    // fetch the data
+    fetch(String(ENDPOINT + "lat=" + lat + "&lng=" + lon + "&date=" + tomorrow))
         .then(function (response) {
             response.json()
                 .then(function (data) {
-                    // console.log('fetching times')
-                    // TODO: handle getting the next day's sunrise
                     let sunrise = data["results"]["sunrise"];
-                    let sunset = data["results"]["sunset"];
-
-                    let fmtSunset = sunset.substring(0, sunset.length - 3);
-
-
-                    console.log("sunrise: " + sunrise + ", sunset: " + sunset);
-                    data = {"sunrise": sunrise, "sunset": sunset};
-
-                    // Send the sun data to the device
-                    returnSunData(data);
+                    let fmtSunrise = sunrise.substring(0, sunrise.length - 3);
+                    console.log("tomorrow's sunrise: " + fmtSunrise);
+                    return fmtSunrise;
                 });
         })
         .catch(function (err) {
@@ -110,6 +89,7 @@ function returnSunData(data) {
 }
 
 messaging.peerSocket.addEventListener("message", (evt) => {
+    console.log("location companion event listener data: " + JSON.stringify(evt));
     if (evt.data && evt.data.command === "sunset_sunrise") {
         let lat, lon;
         geolocation.getCurrentPosition(function (position) {
@@ -117,7 +97,7 @@ messaging.peerSocket.addEventListener("message", (evt) => {
             lon = position.coords.longitude;
             // console.log(position.coords.latitude + ", " + position.coords.longitude);
         })
-        returnSunData(querySunsetSunrise(lat, lon, evt.data.timeStr, evt.data.tick));
+        returnSunData(querySunsetSunrise(lat, lon));
     }
 });
 

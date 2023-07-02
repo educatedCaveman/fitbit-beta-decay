@@ -226,7 +226,7 @@ function getTimeDiff(time1, time2) {
 
     const hrStr = utils.padString(hours, 2, "0");
     const minStr = utils.padString(mins, 2, "0");
-    
+
     return String(hrStr + ":" + minStr);
 }
 
@@ -243,7 +243,7 @@ function generateSunStr(tickEvent) {
     const currentTime = String(hours + ":" + mins);
 
     // TODO: rewrite to not need current time?
-    const sunData = location.getSunData(currentTime, tickEvent);
+    const sunData = location.getSunData();
     // console.log(JSON.stringify(sunData));
     let sunrise, sunset;
 
@@ -265,7 +265,7 @@ function generateSunStr(tickEvent) {
         // between sunrise and sunset
         return getTimeDiff(sunset, currentTime);
 
-    } else {        
+    } else {
         // after sunset
         // before sunrise
         return getTimeDiff(sunrise, currentTime);

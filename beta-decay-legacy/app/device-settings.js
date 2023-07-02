@@ -6,17 +6,6 @@ const SETTINGS_TYPE = "cbor";
 const SETTINGS_FILE = "settings.cbor";
 
 let settings, onsettingschange;
-// let settings = {
-//     "complication": "1",
-//     "dateFmt": "1",
-//     "modelFmt": "3",
-//     "colorText": "gold",
-//     "opacityTextBackground": 35,
-//     "colorTextBackground": "fb-extra-dark-gray",
-//     "colorBackground": "black",
-//     "colorLabel": "lightgray",
-//     "sunInterval":  4
-// };
 const defaults = {
     "complication": "1",
     "dateFmt": "1",
@@ -26,9 +15,8 @@ const defaults = {
     "colorTextBackground": "fb-extra-dark-gray",
     "colorBackground": "black",
     "colorLabel": "lightgray",
-    "sunInterval":  4
+    "sunInterval": 4
 };
-// let onsettingschange;
 
 export function initialize(callback) {
     settings = loadSettings();
@@ -40,9 +28,18 @@ export function initialize(callback) {
 
 // Received message containing settings data
 messaging.peerSocket.addEventListener("message", function (evt) {
-    // if (settings[evt.data.key] === undefined) {
-    //     console.log("undefined settings key: " + evt.data.key);
-    // }
+    console.log("companion settings data: " + JSON.stringify(evt))
+
+    // TODO: this needs rewriting
+
+    if (settings === undefined) {
+        settings = defaults;
+    } else if (evt.data === undefined) {
+        // do nothing
+        // this message is not for us
+        return;
+    }
+
     settings[evt.data.key] = evt.data.value;
     onsettingschange(settings);
 })

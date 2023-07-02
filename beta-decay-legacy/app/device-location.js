@@ -4,32 +4,23 @@ import * as utils from "./utils";
 
 let sunData;
 
-// export function initialize(callback) {
-//     settings = loadSettings();
-//     onsettingschange = callback;
-//     onsettingschange(settings);
-// }
 
-// import * as messaging from "messaging";
-
-export function getSunData(currentTime, tickEvent) {
+export function getSunData() {
     if (sunData === undefined) {
-        fetchSuntime(currentTime, tickEvent);
+        fetchSuntime();
     }
     return sunData;
 }
 
 export function initialize() {
-    fetchSuntime("00:00");
+    fetchSuntime();
 }
 
-function fetchSuntime(currentTime, tickEvent) {
+function fetchSuntime() {
     if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
         // Send a command to the companion
         messaging.peerSocket.send({
-            command: "sunset_sunrise",
-            timeStr: currentTime,
-            tick: tickEvent
+            command: "sunset_sunrise"
         });
     }
 }
@@ -40,7 +31,7 @@ function convertAMPM(timeStr) {
     // note it uses AM/PM
 
     // handle null
-    if (timeStr === null) {return timeStr};
+    if (timeStr === null) { return timeStr };
 
     // parse the input value
     let hour, min;
@@ -63,12 +54,12 @@ function convertAMPM(timeStr) {
 
 function processSunData(data) {
     //   console.log(`The temperature is: ${data.temperature}`);
-    //   console.log(JSON.stringify(data));
+    console.log("companion location data: " + JSON.stringify(data));
 
     let sunrise = convertAMPM(data.sunrise);
     let sunset = convertAMPM(data.sunset);
 
-    sunData = {"sunrise": sunrise, "sunset": sunset};
+    sunData = { "sunrise": sunrise, "sunset": sunset };
 }
 
 messaging.peerSocket.addEventListener("open", (evt) => {
@@ -91,7 +82,8 @@ messaging.peerSocket.addEventListener("error", (err) => {
 
 // this converts hours to miliseconds
 // setInterval(fetchSuntime, 1000 * 3600 * simpleSettings.getSettingsVal('sunInterval'));
-setInterval(fetchSuntime, 60000);
+// setInterval(fetchSuntime, 60000);
+setInterval(fetchSuntime, 10000);
 
 
 // TODO: do i fetch the info on a schedule here, as above
