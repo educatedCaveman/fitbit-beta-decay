@@ -72,7 +72,7 @@ The detected model.  Configurable to truncated, squished, or codename.  Truncate
 ### Time to Sunset or Sunrise
 Does what it says on the tin.  Updates periodically; configurable from 30 minutes to 3 hours.  There may be a slight innacuracy immediately after sunset due to it using the current day's sunrise time instead of tomorrow's.  Within a minute or 2, it should re-query for it, and update itself.  This will be the most pronounced on the [biannual equinoxes](https://en.wikipedia.org/wiki/Equinox). (around March 20th, and September 23rd)
 
-Powered by [SunriseSunset.io](SunriseSunset.io).
+Powered by [SunriseSunset.io](https://sunrisesunset.io/api/).
 
 ![sunset_sunrise](screenshots/sunset_sunrise.png)
 
