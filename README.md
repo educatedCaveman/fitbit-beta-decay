@@ -152,7 +152,22 @@ To crispen the images, reducing them to purely black/white, run the following co
 
 ### Setup for Sideloading
 
-**TODO**: make this a script
+Before sideloading, please note the 2 following sections of `package.json` which appear to be necessary for said sideloading. 
+
+```json
+"enableProposedAPI": true
+```
+```json
+"dependencies": { 
+  "yarn": "^1.22.19",
+  "fitfont": "^1.3.3",
+  "@fitbit/sdk": "~7.1.0-pre.0",
+  "@fitbit/sdk-cli": "~1.8.0-pre.10",
+  "@fitbit/sdk-build-targets": "cmengler/fitbit-sdk-build-targets"
+}
+```
+
+`sideload.sh` should accomplish the following:
 
 1. recursively delete `package-lock.json`, `yarn.lock`, `app/`, `build/`, `companion/`, `node_modules/`, `resources/`, and `settings/`.
 2. recursively copy `app/`, `companion/`, `resources/`, and `settings/` into destination.
