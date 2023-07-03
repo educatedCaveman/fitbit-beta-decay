@@ -21,19 +21,24 @@ function querySunsetSunrise(lat, lon) {
         .then(function (response) {
             response.json()
                 .then(function (data) {
-                    let sunrise = data["results"]["sunrise"];
-                    let sunset = data["results"]["sunset"];
+                    // console.log(JSON.stringify(data))
+                    if (data['status'] === "OK") {
+                        let sunrise = data["results"]["sunrise"];
+                        let sunset = data["results"]["sunset"];
 
-                    // handle getting the next day's sunrise
-                    // after sunset, we need the next day's sunrise
-                    let fmtSunset = utils.convertAMPM24h(sunset);
-                    if (fmtSunset < now) {
-                        sunrise = queryNextSunrise(lat, lon, tomorrowStr)
+                        // handle getting the next day's sunrise
+                        // after sunset, we need the next day's sunrise
+                        let fmtSunset = utils.convertAMPM24h(sunset);
+                        if (fmtSunset < now) {
+                            sunrise = queryNextSunrise(lat, lon, tomorrowStr)
+                        }
+
+                        // Send the sun data to the device
+                        console.log('fetched new times')
+                        returnSunData({ "sunrise": sunrise, "sunset": sunset });
+                    } else {
+                        return;
                     }
-
-                    // Send the sun data to the device
-                    console.log('fetched new times')
-                    returnSunData({ "sunrise": sunrise, "sunset": sunset });
                 });
         })
         .catch(function (err) {
@@ -48,9 +53,14 @@ function queryNextSunrise(lat, lon, tomorrow) {
         .then(function (response) {
             response.json()
                 .then(function (data) {
-                    let sunrise = data["results"]["sunrise"];
-                    let fmtSunrise = sunrise.substring(0, sunrise.length - 3);
-                    return fmtSunrise;
+                    // console.log(JSON.stringify(data))
+                    if (data['status'] === "OK") {
+                        let sunrise = data["results"]["sunrise"];
+                        let fmtSunrise = sunrise.substring(0, sunrise.length - 3);
+                        return fmtSunrise;
+                    } else {
+                        return;
+                    }
                 });
         })
         .catch(function (err) {
@@ -69,12 +79,12 @@ function returnSunData(data) {
 
 messaging.peerSocket.addEventListener("message", (evt) => {
     if (evt.data && evt.data.command === "sunset_sunrise") {
-        let lat, lon;
         geolocation.getCurrentPosition(function (position) {
-            lat = position.coords.latitude;
-            lon = position.coords.longitude;
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+            // console.log("lat: " + lat + " lon: " + lon)
+            returnSunData(querySunsetSunrise(lat, lon));
         })
-        returnSunData(querySunsetSunrise(lat, lon));
     }
 });
 
