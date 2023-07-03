@@ -29,8 +29,7 @@ function clockCallback(data) {
     drawText.drawLittleText(data.comp, 'comp_fg');
 }
 // seconds for testing. minutes for IRL
-nonClock.initialize("minutes", clockCallback);
-// nonClock.initialize("seconds", clockCallback);
+nonClock.initialize("seconds", clockCallback);
 
 
 /* --------- HRM ---------- */
