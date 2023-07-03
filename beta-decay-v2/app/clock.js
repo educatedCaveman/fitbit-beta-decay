@@ -20,8 +20,8 @@ function tickHandler(evt) {
     let compText = complication.getCompText(compType, evt);
 
     // callback
-    clockCallback({ 
-        steps: steps.getFormattedSteps(), 
+    clockCallback({
+        steps: steps.getFormattedSteps(),
         batt: String(battery.chargeLevel + "%"),
         comp: compText,
     });

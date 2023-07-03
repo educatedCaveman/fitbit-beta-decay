@@ -181,27 +181,33 @@ function generateModelStr() {
     // device.modelName is like sense or versa
 
     // TODO: need to wait for versa 4 and sense 2 model info
+    // through trial and error, i discovered sense 2 is 60
     const models = {
         '36': { truncated: "VERSA", squished: "VRSA3", code: "ATLAS" },
         '44': { truncated: "SENSE", squished: "SENSE", code: "VULCN" },
         '98': { truncated: "VERSA", squished: "VRSA4", code: "HERA" },
-        '99': { truncated: "SENSE", squished: "SENS2", code: "RHEA" }
+        '60': { truncated: "SENSE", squished: "SENS2", code: "RHEA" },
+        '99': { model: "UNKWN"}
     }
 
     const modelNum = device.modelId
     const format = simpleSettings.getSettingsVal('modelFmt');
-    switch (format) {
-        case '1':
-            return models[modelNum].truncated;
+    if (modelNum) {
+        switch (format) {
+            case '1':
+                return models[modelNum].truncated;
 
-        case '2':
-            return models[modelNum].squished;
+            case '2':
+                return models[modelNum].squished;
 
-        case '3':
-        default:
-            return models[modelNum].code;
+            case '3':
+            default:
+                return models[modelNum].code;
+        }
+    } else {
+        // unknown model (Versa 4)
+        return models['99'].model
     }
-
 }
 
 
@@ -253,7 +259,7 @@ function generateSunStr(tickEvent) {
     // } else {
     //     console.log('tock')
     // }
-    
+
 
 
     // return either new or saved data
@@ -273,14 +279,14 @@ function generateSunStr(tickEvent) {
     }
 
     // handle nulls (should only be for the poles)
-    if (sunrise === null || sunset === null) { return "POLAR" }    
-    
+    if (sunrise === null || sunset === null) { return "POLAR" }
+
     //TODO: immediately after sunset, query again to get updated sunrise.
     const currentMins = parseInt(hours) * 60 + parseInt(mins);
     const sunTime = sunset.split(":");
     const sunsetMins = parseInt(sunTime[0]) * 60 + parseInt(sunTime[1]);
     const sunsetDiff = currentMins - sunsetMins;
-    if (sunsetDiff === 0 || sunsetDiff === 1) {location.updateSunData()};
+    if (sunsetDiff === 0 || sunsetDiff === 1) { location.updateSunData() };
 
     //determine which time to comare against
     if (currentTime >= sunrise && currentTime < sunset) {

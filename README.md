@@ -72,7 +72,7 @@ The detected model.  Configurable to truncated, squished, or codename.  Truncate
 ### Time to Sunset or Sunrise
 Does what it says on the tin.  Updates periodically; configurable from 30 minutes to 3 hours.  There may be a slight innacuracy immediately after sunset due to it using the current day's sunrise time instead of tomorrow's.  Within a minute or 2, it should re-query for it, and update itself.  This will be the most pronounced on the [biannual equinoxes](https://en.wikipedia.org/wiki/Equinox). (around March 20th, and September 23rd)
 
-Powered by [SunriseSunset.io](SunriseSunset.io).
+Powered by [SunriseSunset.io](https://sunrisesunset.io/api/).
 
 ![sunset_sunrise](screenshots/sunset_sunrise.png)
 
@@ -152,7 +152,22 @@ To crispen the images, reducing them to purely black/white, run the following co
 
 ### Setup for Sideloading
 
-**TODO**: make this a script
+Before sideloading, please note the 2 following sections of `package.json` which appear to be necessary for said sideloading. 
+
+```json
+"enableProposedAPI": true
+```
+```json
+"dependencies": { 
+  "yarn": "^1.22.19",
+  "fitfont": "^1.3.3",
+  "@fitbit/sdk": "~7.1.0-pre.0",
+  "@fitbit/sdk-cli": "~1.8.0-pre.10",
+  "@fitbit/sdk-build-targets": "cmengler/fitbit-sdk-build-targets"
+}
+```
+
+`sideload.sh` should accomplish the following:
 
 1. recursively delete `package-lock.json`, `yarn.lock`, `app/`, `build/`, `companion/`, `node_modules/`, `resources/`, and `settings/`.
 2. recursively copy `app/`, `companion/`, `resources/`, and `settings/` into destination.
@@ -164,7 +179,7 @@ To crispen the images, reducing them to purely black/white, run the following co
         export FITBIT_QA_COMMANDS=1
         yarn debug
 
-5. manually run the following commands on the `fitbot$` prompt:
+5. manually run the following commands on the `fitbt$` prompt:
 
         hosts
         connect phone
