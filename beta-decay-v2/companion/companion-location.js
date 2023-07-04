@@ -13,15 +13,14 @@ function querySunsetSunrise(lat, lon) {
     tomorrow.setDate(tomorrow.getDate() + 1);
     const todayStr = today.toISOString().substring(0, 10);
     const tomorrowStr = tomorrow.toISOString().substring(0, 10);
-    const hourStr = String("00" + today.getHours()).slice(-2);
-    const minsStr = String("00" + today.getMinutes()).slice(-2);
+    const hourStr = utils.padString(today.getHours(), 2, "0");
+    const minsStr = utils.padString(today.getMinutes(), 2, "0");
     const now = String(hourStr + ":" + minsStr);
 
     fetch(String(ENDPOINT + "lat=" + lat + "&lng=" + lon + "&date=" + todayStr))
         .then(function (response) {
             response.json()
                 .then(function (data) {
-                    // console.log(JSON.stringify(data))
                     if (data['status'] === "OK") {
                         let sunrise = data["results"]["sunrise"];
                         let sunset = data["results"]["sunset"];
@@ -32,10 +31,11 @@ function querySunsetSunrise(lat, lon) {
                         if (fmtSunset < now) {
                             sunrise = queryNextSunrise(lat, lon, tomorrowStr)
                         }
+                        let fmtSunrise = utils.convertAMPM24h(sunrise);
 
                         // Send the sun data to the device
                         console.log('fetched new times')
-                        returnSunData({ "sunrise": sunrise, "sunset": sunset });
+                        returnSunData({ "sunrise": fmtSunrise, "sunset": fmtSunset });
                     } else {
                         return;
                     }
@@ -53,11 +53,8 @@ function queryNextSunrise(lat, lon, tomorrow) {
         .then(function (response) {
             response.json()
                 .then(function (data) {
-                    // console.log(JSON.stringify(data))
                     if (data['status'] === "OK") {
-                        let sunrise = data["results"]["sunrise"];
-                        let fmtSunrise = sunrise.substring(0, sunrise.length - 3);
-                        return fmtSunrise;
+                        return data["results"]["sunrise"];
                     } else {
                         return;
                     }
@@ -82,7 +79,6 @@ messaging.peerSocket.addEventListener("message", (evt) => {
         geolocation.getCurrentPosition(function (position) {
             let lat = position.coords.latitude;
             let lon = position.coords.longitude;
-            // console.log("lat: " + lat + " lon: " + lon)
             returnSunData(querySunsetSunrise(lat, lon));
         })
     }

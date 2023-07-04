@@ -19,16 +19,12 @@ export function getSunData() {
 }
 
 
-function fetchSuntime() {    
-    // console.log("fetchSuntime() called")
-    // console.log(JSON.stringify(sunData))
+function fetchSuntime() {
     if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
         // Send a command to the companion
-        // console.log('about to send message')
         messaging.peerSocket.send({
             command: "sunset_sunrise"
         });
-        // console.log('sent message')
     }
 }
 

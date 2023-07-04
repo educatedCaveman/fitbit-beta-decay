@@ -196,8 +196,9 @@ Before sideloading, please note the 2 following sections of `package.json` which
 
 ## Changelog
 
-| Version | date       | JIRA cards                             | Description                             |
-| ------- | ---------- | -------------------------------------- | --------------------------------------- |
-| 0.1.0   | 2023-07-01 | ??                                     | more advanced version ready to sidelaod |
-| 0.1.1   | 2023-07-02 | n/a                                    | changes to get sideloading working      |
-| 0.1.2   | 2023-07-03 | COD-28, COD-29, COD-30, COD-31, COD-32 | bugfixes found during sideloading       |
+| Version | date       | JIRA cards                             | Description                                     |
+| ------- | ---------- | -------------------------------------- | ----------------------------------------------- |
+| 0.1.0   | 2023-07-01 | ??                                     | more advanced version ready to sidelaod         |
+| 0.1.1   | 2023-07-02 | n/a                                    | changes to get sideloading working              |
+| 0.1.2   | 2023-07-03 | COD-28, COD-29, COD-30, COD-31, COD-32 | bugfixes found during sideloading               |
+| 0.1.3   | 2023-07-04 | COD-35                                 | fixing issue where time to sunrise said `15:-7` |
