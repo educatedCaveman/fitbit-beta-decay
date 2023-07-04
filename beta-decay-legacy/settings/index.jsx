@@ -67,6 +67,7 @@ function mySettings(props) {
             { name: "Model", value: "4" },
             { name: "Sunset/Sunrise", value: "5" },
             { name: "Goal Progress", value: "6" },
+            { name: "Weather", value: "7" },
             { name: "None", value: "99" }
           ]}
           onSelection={(selection) => props.settingsStorage.setItem('complication', selection.values[0].value)}
@@ -136,6 +137,21 @@ function mySettings(props) {
               { name: "3 hours", value: "3" }
             ]}
             onSelection={(selection) => props.settingsStorage.setItem('sunInterval', selection.values[0].value)}
+          />
+        }
+        {/* Show/Hide the extra options for the Weather Complication */}
+        {(JSON.parse(props.settingsStorage.getItem('complication') ?? JSON.stringify(dummy))).values[0].value === "7" &&
+          <Select
+            label="Refresh Interval"
+            selectViewTitle='Refresh Interval'
+            settingsKey='weatherInterval'
+            options={[
+              { name: "30 minutes", value: "0" },
+              { name: "1 hour", value: "1" },
+              { name: "2 hours", value: "2" },
+              { name: "3 hours", value: "3" }
+            ]}
+            onSelection={(selection) => props.settingsStorage.setItem('weatherInterval', selection.values[0].value)}
           />
         }
       </Section>
