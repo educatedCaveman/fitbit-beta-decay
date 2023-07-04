@@ -93,6 +93,14 @@ function mySettings(props) {
             onSelection={(fmtSelection) => props.settingsStorage.setItem('dateFmt', fmtSelection.values[0].value)}
           />
         }
+        {/* Show/Hide the extra options for the Glitch Complication */}
+        {(JSON.parse(props.settingsStorage.getItem('complication') ?? JSON.stringify(dummy))).values[0].value === "1" &&
+          <Toggle
+            settingsKey="glitchScroll"
+            label="Animate"
+            onChange={(scroll) => props.settingsStorage.setItem('glitchScroll', JSON.stringify(scroll))}
+          />
+        }
         {/* Show/Hide the extra options for the Model Complication */}
         {(JSON.parse(props.settingsStorage.getItem('complication') ?? JSON.stringify(dummy))).values[0].value === "4" &&
           <Select
@@ -111,7 +119,7 @@ function mySettings(props) {
         {(JSON.parse(props.settingsStorage.getItem('complication') ?? JSON.stringify(dummy))).values[0].value === "5" &&
           <Toggle
             settingsKey="queryPolitely"
-            label="Be Polite?"
+            label="Be Polite"
             onChange={(polite) => props.settingsStorage.setItem('queryPolitely', JSON.stringify(polite))}
           />
         }
@@ -170,6 +178,7 @@ function mySettings(props) {
             props.settingsStorage.setItem('colorTextBackground', JSON.stringify("fb-extra-dark-gray"))
             props.settingsStorage.setItem('colorBackground', JSON.stringify("black"))
             props.settingsStorage.setItem('colorLabel', JSON.stringify("lightgrey"))
+            props.settingsStorage.setItem('glitchScroll', JSON.stringify(true))
           }}
         />
       </Section>

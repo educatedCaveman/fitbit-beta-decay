@@ -9,6 +9,7 @@ import * as location from "./device-location";
 const allChars = "\"!#$%&'()*+,-./1234567890:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¥¦¨©«®°±²³´¶¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ‐–—‘’“”…█"
 const asciiExtended = " !\"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ"
 const requestOffset = parseInt(Math.random() * 11);
+let glitchStr = "";
 
 export function getCompText(compType, tickEvent) {
     let compText = String("");
@@ -51,19 +52,32 @@ export function getCompText(compType, tickEvent) {
     return compText;
 }
 
+
 // TODO: if i have a swtich between the font types, need to switch between the 2 character sets.
 function generateGlitchTxt() {
-    let glitchStr = "";
-    for (let i = 0; i < 5; i++) {
+    // get the scrolling setting, defaulting to not scrolling
+    const scroll = simpleSettings.getSettingsVal('glitchScroll');
+
+    if (scroll && glitchStr != "") {
+        //scrolling 
         let index = Math.floor(Math.random() * allChars.length);
-        glitchStr = glitchStr + allChars[index];
+        glitchStr = String(glitchStr + allChars[index]).slice(-5);
+    } else {
+        // initialize, or refresh whole glitch
+        glitchStr = "";
+        for (let i = 0; i < 5; i++) {
+            let index = Math.floor(Math.random() * allChars.length);
+            glitchStr = glitchStr + allChars[index];
+        }
     }
     return glitchStr;
 }
 
+
 function generateNoneWidget() {
     return String("█████");
 }
+
 
 function generateTimeStr(tickEvent) {
     // get initial hour and minute values
@@ -85,6 +99,7 @@ function generateTimeStr(tickEvent) {
 
     return timeStr;
 }
+
 
 function generateDateStr(tickEvent) {
     // interogate the tickEvent    
@@ -175,6 +190,7 @@ function generateDateStr(tickEvent) {
     return dateStr;
 }
 
+
 function generateModelStr() {
     // https://dev.fitbit.com/build/reference/device-api/device/
     // device.type is like hera or rhea
@@ -259,8 +275,6 @@ function generateSunStr(tickEvent) {
     // } else {
     //     console.log('tock')
     // }
-
-
 
     // return either new or saved data
     const hours = utils.padString(tickEvent.date.getHours(), 2, "0");
