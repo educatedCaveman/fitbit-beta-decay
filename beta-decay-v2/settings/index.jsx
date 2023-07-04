@@ -68,6 +68,7 @@ function mySettings(props) {
             { name: "Sunset/Sunrise", value: "5" },
             { name: "Goal Progress", value: "6" },
             { name: "Weather", value: "7" },
+            { name: "Altitude", value: "8" },
             { name: "None", value: "99" }
           ]}
           onSelection={(selection) => props.settingsStorage.setItem('complication', selection.values[0].value)}
