@@ -16,7 +16,8 @@ const defaults = {
     "colorBackground": "black",
     "colorLabel": "lightgray",
     "sunInterval": 1,
-    "queryPolitely": true
+    "queryPolitely": true,
+    "glitchScroll": false,
 };
 
 export function initialize(callback) {
@@ -29,15 +30,13 @@ export function initialize(callback) {
 
 // Received message containing settings data
 messaging.peerSocket.addEventListener("message", function (evt) {
-
-    // TODO: this needs rewriting
-    // or does it?
-
     if (settings === undefined) {
+        console.log('settings undefined');
         settings = defaults;
     } else if (evt.data === undefined) {
+        console.log('event has no data');
         return;
-    }
+    } else {}
 
     settings[evt.data.key] = evt.data.value;
     onsettingschange(settings);
@@ -67,11 +66,17 @@ function saveSettings() {
 
 
 export function getSettingsVal(settingsKey) {
-    let settingsVal;
     try {
-        settingsVal = settings[settingsKey].values[0].value
+        if (typeof(settings[settingsKey]) === "boolean") {
+            return settings[settingsKey];
+        } else if (settings[settingsKey] === undefined) {
+            return;
+        } else {
+            // settings.settingsKey should not be a boolean, and should not be undefined
+            return settings[settingsKey].values[0].value;
+        }
     } catch (ex) {
-        settingsVal = defaults[settingsKey]
+        // do nothing?
     }
-    return settingsVal
+
 }
