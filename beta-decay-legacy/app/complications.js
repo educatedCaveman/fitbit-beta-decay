@@ -6,6 +6,7 @@ import { me as device } from "device";
 import * as location from "./device-location";
 import { me as appbit } from "appbit";
 import { today, goals, primaryGoal } from "user-activity";
+import * as weather from "./device-weather";
 
 
 const allChars = "\"!#$%&'()*+,-./1234567890:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¥¦¨©«®°±²³´¶¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ‐–—‘’“”…█"
@@ -45,6 +46,12 @@ export function getCompText(compType, tickEvent) {
         // Goal Progress
         case "6":
             compText = generateProgressStr();
+            break;
+
+        // Weather/Temperature
+        case "7":
+            // just fetch the weather directly
+            compText = generateWeatherStr(tickEvent);
             break;
 
         // glitch (default)
@@ -367,4 +374,31 @@ function generateProgressStr() {
     }
     // return dummy value
     return "--%";
+}
+
+
+function generateWeatherStr(tickEvent) {
+    const baseInterval = simpleSettings.getSettingsVal('weatherInterval');
+    let interval;
+    if (baseInterval === 0) {
+        interval = 30
+    } else {
+        interval = baseInterval * 60;
+    }
+    // convert the tick event to the minute of the day, minus the delay
+    // this means the update happens delay minutes after the interval
+    const tickMins = utils.tickToMins(tickEvent, 0);
+    // update the data
+    if (tickMins % interval === 0) { weather.updateWeather() }
+    // debug code
+    // TODO: remove eventually
+    // if (tickEvent.date.getSeconds() % 10 === 0) {
+    //     // console.log('tick')
+    //     weather.updateWeather()
+    // } else {
+    //     // console.log('tock')
+    // }
+
+    return weather.getWeather();
+
 }

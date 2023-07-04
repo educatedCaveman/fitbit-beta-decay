@@ -11,6 +11,7 @@
     - [Model](#model)
     - [Time to Sunset or Sunrise](#time-to-sunset-or-sunrise)
     - [Main Goal Progress](#main-goal-progress)
+    - [Weather](#weather)
     - [Upcoming](#upcoming)
 - [Background](#background)
 - [Licensing](#licensing)
@@ -93,10 +94,15 @@ A percentage representing your current progress towards your daily goal.
 
 ![goal_progress](screenshots/goal_progress.png)
 
+### Weather
+
+Just the local temperature, in your preferred units.
+
+![wather](screenshots/weather_temperature.png)
+
 ### Upcoming
 
 - [ ] Altitude
-- [ ] Weather
 
 # Background
 
@@ -212,3 +218,4 @@ Before sideloading, please note the 2 following sections of `package.json` which
 | 0.2.0   | 2023-07-04 | COD-34                                 | scrolling glitch                                |
 | 0.3.0   | 2023-07-04 | COD-27                                 | custom (hex) colors                             |
 | 0.4.0   | 2023-07-04 | COD-19                                 | goal progress complication                      |
+| 0.5.0   | 2023-07-04 | COD-15                                 | weather (temperature) complication              |

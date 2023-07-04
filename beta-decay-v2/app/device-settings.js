@@ -38,12 +38,9 @@ export function initialize(callback) {
 
 // Received message containing settings data
 messaging.peerSocket.addEventListener("message", function (evt) {
-    console.log(JSON.stringify(evt))
     if (settings === undefined) {
-        console.log('settings undefined');
         settings = defaults;
     } else if (evt.data === undefined) {
-        console.log('event has no data');
         return;
     } else {}
 
