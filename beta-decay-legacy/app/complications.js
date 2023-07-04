@@ -4,6 +4,8 @@ import * as simpleSettings from "./device-settings";
 import { me as device } from "device";
 // import { geolocation } from "geolocation";
 import * as location from "./device-location";
+import { me as appbit } from "appbit";
+import { today, goals, primaryGoal } from "user-activity";
 
 
 const allChars = "\"!#$%&'()*+,-./1234567890:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¥¦¨©«®°±²³´¶¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ‐–—‘’“”…█"
@@ -38,6 +40,11 @@ export function getCompText(compType, tickEvent) {
         // Sunset-Sunrise
         case "5":
             compText = generateSunStr(tickEvent);
+            break;
+
+        // Goal Progress
+        case "6":
+            compText = generateProgressStr();
             break;
 
         // glitch (default)
@@ -203,7 +210,7 @@ function generateModelStr() {
         '44': { truncated: "SENSE", squished: "SENSE", code: "VULCN" },
         '98': { truncated: "VERSA", squished: "VRSA4", code: "HERA" },
         '60': { truncated: "SENSE", squished: "SENS2", code: "RHEA" },
-        '99': { model: "UNKWN"}
+        '99': { model: "UNKWN" }
     }
 
     const modelNum = device.modelId
@@ -312,4 +319,52 @@ function generateSunStr(tickEvent) {
         // NOTE: the API query handles returning the next day's sunrise, when the current time is after sunset
         return getTimeDiff(sunrise, currentTime);
     }
+}
+
+
+function generateProgressStr() {
+    if (appbit.permissions.granted("access_activity")) {
+        let goalVal;
+        let progVal;
+
+        switch (primaryGoal) {
+            case "calories":
+                goalVal = goals.calories;
+                progVal = today.adjusted.calories;
+                break;
+
+            case "distance":
+                goalVal = goals.distance;
+                progVal = today.adjusted.distance;
+                break;
+
+            case "elevationGain":
+                goalVal = goals.elevationGain;
+                progVal = today.adjusted.elevationGain;
+                break;
+
+            // ommitting active zone minutes because it doesn't appear to have a queryable goal
+
+            case "steps":
+            default:
+                goalVal = goals.steps;
+                progVal = today.adjusted.steps;
+                break;
+        }
+
+        if (goalVal) {
+            const progress = progVal / goalVal;
+            let fmtProgress;
+            if (progress < 1) {
+                fmtProgress = String((progress * 100).toFixed(1) + "%");
+            } else {
+
+                fmtProgress = String(Math.round(progress * 100) + "%");
+            }
+            return fmtProgress;
+
+        }
+    }
+    // return dummy value
+    return "--%";
 }

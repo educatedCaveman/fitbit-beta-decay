@@ -10,6 +10,7 @@
     - [Date](#date)
     - [Model](#model)
     - [Time to Sunset or Sunrise](#time-to-sunset-or-sunrise)
+    - [Main Goal Progress](#main-goal-progress)
     - [Upcoming](#upcoming)
 - [Background](#background)
 - [Licensing](#licensing)
@@ -86,11 +87,16 @@ Powered by [SunriseSunset.io](https://sunrisesunset.io/api/).
 
 ![sunset_sunrise](screenshots/sunset_sunrise.png)
 
+### Main Goal Progress
+
+A percentage representing your current progress towards your daily goal.
+
+![goal_progress](screenshots/goal_progress.png)
+
 ### Upcoming
 
 - [ ] Altitude
 - [ ] Weather
-- [ ] Main Goal Progress
 
 # Background
 
@@ -205,3 +211,4 @@ Before sideloading, please note the 2 following sections of `package.json` which
 | 0.1.3   | 2023-07-04 | COD-35                                 | fixing issue where time to sunrise said `15:-7` |
 | 0.2.0   | 2023-07-04 | COD-34                                 | scrolling glitch                                |
 | 0.3.0   | 2023-07-04 | COD-27                                 | custom (hex) colors                             |
+| 0.4.0   | 2023-07-04 | COD-19                                 | goal progress complication                      |
