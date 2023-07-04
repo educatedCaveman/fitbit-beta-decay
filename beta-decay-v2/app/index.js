@@ -52,7 +52,7 @@ function settingsCallback(data) {
         text.style.fill = data.colorText;
     }
 
-    // text background color. preset/custom
+    // text background color. preset
     if (data.colorTextBackground) {
         textBG.style.fill = data.colorTextBackground;
     }
@@ -70,6 +70,24 @@ function settingsCallback(data) {
     // label color
     if (data.colorLabel) {
         label.style.fill = data.colorLabel;
+    }
+
+    // override/custom colors
+    // text color
+    if (data.customText && simpleSettings.getSettingsVal('customizeText')) {
+        text.style.fill = data.customText.name;
+    }
+    // text background color
+    if (data.customTextBackground && simpleSettings.getSettingsVal('customizeTextBackground')) {
+        textBG.style.fill = data.customTextBackground.name;
+    }
+    // background color
+    if (data.customBackground && simpleSettings.getSettingsVal('customizeBackground')) {
+        background.style.fill = data.customBackground.name;
+    }
+    // label color
+    if (data.customLabel && simpleSettings.getSettingsVal('customizeLabel')) {
+        label.style.fill = data.customLabel.name;
     }
 
 }

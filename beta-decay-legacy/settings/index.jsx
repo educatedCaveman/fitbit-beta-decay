@@ -166,6 +166,74 @@ function mySettings(props) {
       </Section>
 
 
+      <Section title="Custom Colors">
+        <Text>
+          Custom colors must be either a hex value (including the '#'), a web standard color name, or a FitBit named color.
+          See <Link source="https://dev.fitbit.com/build/guides/user-interface/css/#colors">this page</Link> for examples.
+        </Text>
+
+        {/* TEXT COLOR */}
+        <Toggle
+          settingsKey="customizeText"
+          label="Text Color"
+          onChange={(customize) => props.settingsStorage.setItem('customizeText', JSON.stringify(customize))}
+        />
+        {(JSON.parse(props.settingsStorage.getItem('customizeText') ?? false)) &&
+          <TextInput
+            label="Custom Text Color"
+            settingsKey="customText"
+            placeholder="#FFFFFF"
+            onChange={(customize) => props.settingsStorage.setItem('customText', JSON.stringify(customize))}
+          />
+        }
+
+        {/* TEXT BACKGROUND COLOR */}
+        <Toggle
+          settingsKey="customizeTextBackground"
+          label="Text Background Color"
+          onChange={(customize) => props.settingsStorage.setItem('customizeTextBackground', JSON.stringify(customize))}
+        />
+        {(JSON.parse(props.settingsStorage.getItem('customizeTextBackground') ?? false)) &&
+          <TextInput
+            label="Custom Text Background Color"
+            settingsKey="customTextBackground"
+            placeholder="#FFFFFF"
+            onChange={(customize) => props.settingsStorage.setItem('customTextBackground', JSON.stringify(customize))}
+          />
+        }
+
+        {/* BACKGROUND COLOR */}
+        <Toggle
+          settingsKey="customizeBackground"
+          label="Background Color"
+          onChange={(customize) => props.settingsStorage.setItem('customizeBackground', JSON.stringify(customize))}
+        />
+        {(JSON.parse(props.settingsStorage.getItem('customizeBackground') ?? false)) &&
+          <TextInput
+            label="Custom Background Color"
+            settingsKey="customBackground"
+            placeholder="#FFFFFF"
+            onChange={(customize) => props.settingsStorage.setItem('customBackground', JSON.stringify(customize))}
+          />
+        }
+
+        {/* LABEL COLOR */}
+        <Toggle
+          settingsKey="customizeLabel"
+          label="Label Text Color"
+          onChange={(customize) => props.settingsStorage.setItem('customizeLabel', JSON.stringify(customize))}
+        />
+        {(JSON.parse(props.settingsStorage.getItem('customizeLabel') ?? false)) &&
+          <TextInput
+            label="Custom Label Text Color"
+            settingsKey="customLabel"
+            placeholder="#FFFFFF"
+            onChange={(customize) => props.settingsStorage.setItem('customLabel', JSON.stringify(customize))}
+          />
+        }
+      </Section>
+
+
       <Section>
         <Button
           list
@@ -179,6 +247,10 @@ function mySettings(props) {
             props.settingsStorage.setItem('colorBackground', JSON.stringify("black"))
             props.settingsStorage.setItem('colorLabel', JSON.stringify("lightgrey"))
             props.settingsStorage.setItem('glitchScroll', JSON.stringify(true))
+            props.settingsStorage.setItem('customizeTextBackground', JSON.stringify(false))
+            props.settingsStorage.setItem('customizeBackground', JSON.stringify(false))
+            props.settingsStorage.setItem('customizeText', JSON.stringify(false))
+            props.settingsStorage.setItem('customizeLabel', JSON.stringify(false))
           }}
         />
       </Section>

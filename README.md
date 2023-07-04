@@ -204,3 +204,4 @@ Before sideloading, please note the 2 following sections of `package.json` which
 | 0.1.2   | 2023-07-03 | COD-28, COD-29, COD-30, COD-31, COD-32 | bugfixes found during sideloading               |
 | 0.1.3   | 2023-07-04 | COD-35                                 | fixing issue where time to sunrise said `15:-7` |
 | 0.2.0   | 2023-07-04 | COD-34                                 | scrolling glitch                                |
+| 0.3.0   | 2023-07-04 | COD-27                                 | custom (hex) colors                             |
