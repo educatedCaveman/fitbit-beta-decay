@@ -12,7 +12,7 @@
     - [Time to Sunset or Sunrise](#time-to-sunset-or-sunrise)
     - [Main Goal Progress](#main-goal-progress)
     - [Weather](#weather)
-    - [Upcoming](#upcoming)
+    - [Altitude](#altitude)
 - [Background](#background)
 - [Licensing](#licensing)
 - [Developer Stuff](#developer-stuff)
@@ -98,11 +98,13 @@ A percentage representing your current progress towards your daily goal.
 
 Just the local temperature, in your preferred units.
 
-![wather](screenshots/weather_temperature.png)
+![weather](screenshots/weather_temperature.png)
 
-### Upcoming
+### Altitude
 
-- [ ] Altitude
+The altitude, in preferred units, using the barometric equation.  This uses the current pressure and the outside temperature to calculate the value.  This should not be considered especially accurate.
+
+![altitude](screenshots/altitude.png)
 
 # Background
 
@@ -219,3 +221,4 @@ Before sideloading, please note the 2 following sections of `package.json` which
 | 0.3.0   | 2023-07-04 | COD-27                                 | custom (hex) colors                             |
 | 0.4.0   | 2023-07-04 | COD-19                                 | goal progress complication                      |
 | 0.5.0   | 2023-07-04 | COD-15                                 | weather (temperature) complication              |
+| 0.6.0   | 2023-07-04 | COD-14                                 | altitude complication                           |
