@@ -7,6 +7,8 @@ import * as location from "./device-location";
 import { me as appbit } from "appbit";
 import { today, goals, primaryGoal } from "user-activity";
 import * as weather from "./device-weather";
+import { units } from "user-settings";
+import { Barometer } from "barometer";
 
 
 const allChars = "\"!#$%&'()*+,-./1234567890:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¥¦¨©«®°±²³´¶¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ‐–—‘’“”…█"
@@ -50,8 +52,12 @@ export function getCompText(compType, tickEvent) {
 
         // Weather/Temperature
         case "7":
-            // just fetch the weather directly
             compText = generateWeatherStr(tickEvent);
+            break;
+
+        // altitude
+        case "8":
+            compText = generateAltStr(tickEvent);
             break;
 
         // glitch (default)
@@ -401,4 +407,67 @@ function generateWeatherStr(tickEvent) {
 
     return weather.getWeather();
 
+}
+
+
+function generateAltStr(tickEvent) {
+    // console.log("temp units: " + units.temperature);
+    // console.log("distance units: " + units.distance);
+
+    // every 30 minutes, refresh the temperature
+    const mins = tickEvent.date.getMinutes();
+    if (mins % 30 === 0) { weather.updateWeather() }
+
+    // constants for calculation:
+    const R = 8.31432;
+    const G = 9.80665;
+    const M = 0.0289644;
+    const Po = 101325;
+    const kelvin = 273.15;
+    const w = weather.getWeather();
+    const T = parseInt(w.replace('°', '').replace('F', '').replace('C', ''));
+
+    // convert temperature to kelvin
+    let kelvin_temp;
+    if (units.temperature === "F") {
+        kelvin_temp = ((T - 32) / 1.8 + kelvin);
+    } else {
+        kelvin_temp = T + kelvin;
+    }
+
+    // get the pressure
+    let press;
+    if (Barometer) {
+        const barometer = new Barometer({ frequency: 1 });
+        barometer.addEventListener("reading", () => {
+            press = barometer.pressure;
+        });
+        barometer.start();
+    } else {
+        return "--"
+    }
+    // handle simulator not registering barometer reading events.
+    if (!press) { press = Po - 1000 }
+
+    // calculate the altitude in meters
+    const altM = (R * kelvin_temp * Math.log(press / Po)) / (-1 * G * M);
+
+    // convert and round the result, as needed.
+    let convAlt;
+    if (units.distance === "us") {
+        // convert meters to feet
+        convAlt = String(Math.round(altM / 3.2808));
+        // add unit, if we have the space
+        if (convAlt.length < 5) {
+            convAlt = String(convAlt + "'");
+        }
+    } else {
+        convAlt = String(Math.round(altM));
+        // add unit, if we have the space
+        if (convAlt.length < 5) {
+            convAlt = String(convAlt + "m");
+        }
+    }
+
+    return String(convAlt);
 }
