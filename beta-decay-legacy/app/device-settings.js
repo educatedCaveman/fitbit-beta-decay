@@ -18,6 +18,14 @@ const defaults = {
     "sunInterval": 1,
     "queryPolitely": true,
     "glitchScroll": false,
+    "customizeTextBackground": false,
+    "customizeBackground": false,
+    "customizeText": false,
+    "customizeLabel": false,
+    "customTextBackground": "fb-extra-dark-gray",
+    "customBackground": "black",
+    "customText": "gold",
+    "customLabel":"lightgray",
 };
 
 export function initialize(callback) {
@@ -30,6 +38,7 @@ export function initialize(callback) {
 
 // Received message containing settings data
 messaging.peerSocket.addEventListener("message", function (evt) {
+    console.log(JSON.stringify(evt))
     if (settings === undefined) {
         console.log('settings undefined');
         settings = defaults;
