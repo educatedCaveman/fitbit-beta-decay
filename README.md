@@ -23,54 +23,63 @@
     - [Generate Fonts](#generate-fonts)
     - [Setup for Sideloading](#setup-for-sideloading)
 
-
 # Features
 
 ![glitch](screenshots/glitch.png)
 
 ## Time
-Or lack thereof.  I don't actually care about seeing the time on my fitbit.  I have a watch I use for that. See the [Background Section](#background) for details.  I have also added a time complication, if someone not in my situation wants it.
+
+Or lack thereof. I don't actually care about seeing the time on my fitbit. I have a watch I use for that. See the [Background Section](#background) for details. I have also added a time complication, if someone not in my situation wants it.
 
 ## Steps
-Steps are front and center. I may change this to be the primary goal.  For the time being, this is not configurable.  After `999` steps, it will display as `1.00k`. After `9999` steps, it will display as `10.0k`.  I'm assuming nobody will get 100k steps in a day.  If you do, [IT'S TIME TO STOP!](https://youtu.be/x0dHUXLmSYQ)
+
+Steps are front and center. I may change this to be the primary goal. For the time being, this is not configurable. After `999` steps, it will display as `1.00k`. After `9999` steps, it will display as `10.0k`. I'm assuming nobody will get 100k steps in a day. If you do, [IT'S TIME TO STOP!](https://youtu.be/x0dHUXLmSYQ)
 
 ## Heart Rate
-Heart rate is the secondary stat, on the bottom.  This is not configurable, and I do not have any plans to make it so.
+
+Heart rate is the secondary stat, on the bottom. This is not configurable, and I do not have any plans to make it so.
 
 ## Battery Level
-Its a useful stat, in the top right.  This is not configurable, and I do not have any plans to make it so.
+
+Its a useful stat, in the top right. This is not configurable, and I do not have any plans to make it so.
 
 ## Complications
-Admittedly, this is a complete afterthought.  While mocking up the UI, I felt that this area needed *something*, but I didn't have a good sense of what *I* wanted there.  So, I decided to make it a single selection of the following:
+
+Admittedly, this is a complete afterthought. While mocking up the UI, I felt that this area needed _something_, but I didn't have a good sense of what _I_ wanted there. So, I decided to make it a single selection of the following:
 
 ### Glitch
 
-Once per tick, a random selection of all the characters in the dot-matrix font is displayed.  There is no great meaning here.  It's gibberish.
+Once per tick, a random selection of all the characters in the dot-matrix font is displayed. There is no great meaning here. It's gibberish.
 
 ![glitch](screenshots/glitch.png)
 
 ### None
+
 The complication is filled with full blocks; "█"
 
 ![glitch](screenshots/none.png)
 
 ### Time
-Self explanatory.  As much as I don't care about it, others might.  The format takes into account user's time format setting.
+
+Self explanatory. As much as I don't care about it, others might. The format takes into account user's time format setting.
 
 ![glitch](screenshots/time.png)
 
 ### Date
-Self explanatory.  The format is configurable within the Date Format menu.  I think all desired formats that can fit in 5 characters for any day of the year are present.  If you think one is missing or would like another, just ask.
+
+Self explanatory. The format is configurable within the Date Format menu. I think all desired formats that can fit in 5 characters for any day of the year are present. If you think one is missing or would like another, just ask.
 
 ![glitch](screenshots/date_DOWdd_lower.png)
 
 ### Model
-The detected model.  Configurable to truncated, squished, or codename.  Truncated cuts off anything after the 5th character; e.g., A Versa 3 would show `VERSA`.  Squished will reformat the name, including revision to fit inside 5 characters; e.g., Sense 2 would show `VRSA3`.  Codename is the internal Codename FitBit uses for the model; e.g., Versa 3 is `ATLAS`.
+
+The detected model. Configurable to truncated, squished, or codename. Truncated cuts off anything after the 5th character; e.g., A Versa 3 would show `VERSA`. Squished will reformat the name, including revision to fit inside 5 characters; e.g., Sense 2 would show `VRSA3`. Codename is the internal Codename FitBit uses for the model; e.g., Versa 3 is `ATLAS`.
 
 ![model](screenshots/model_ID.png)
 
 ### Time to Sunset or Sunrise
-Does what it says on the tin.  Updates periodically; configurable from 30 minutes to 3 hours.  There may be a slight innacuracy immediately after sunset due to it using the current day's sunrise time instead of tomorrow's.  Within a minute or 2, it should re-query for it, and update itself.  This will be the most pronounced on the [biannual equinoxes](https://en.wikipedia.org/wiki/Equinox). (around March 20th, and September 23rd)
+
+Does what it says on the tin. Updates periodically; configurable from 30 minutes to 3 hours. There may be a slight innacuracy immediately after sunset due to it using the current day's sunrise time instead of tomorrow's. Within a minute or 2, it should re-query for it, and update itself. This will be the most pronounced on the [biannual equinoxes](https://en.wikipedia.org/wiki/Equinox). (around March 20th, and September 23rd)
 
 Powered by [SunriseSunset.io](https://sunrisesunset.io/api/).
 
@@ -81,7 +90,6 @@ Powered by [SunriseSunset.io](https://sunrisesunset.io/api/).
 - [ ] Altitude
 - [ ] Weather
 - [ ] Main Goal Progress
-
 
 # Background
 
@@ -116,7 +124,7 @@ Font-Image generation is covered [here](#generate-fonts).
 
 ### Dot-matrix
 
-Official name is Repetition Scrolling.  These heights are useful for determining positioning.
+Official name is Repetition Scrolling. These heights are useful for determining positioning.
 
 | font size | width | height |
 | --------- | ----- | ------ |
@@ -132,16 +140,15 @@ TODO
 
 my local settings path is `C:\Users\drake\AppData\Roaming\Fitbit OS Simulator\vulcan\companion\app_72f2cf03-6f6e-4e60-b834-feca06a79361\settingsstorage`
 
-
 ## Setup
 
-Perform the [general install instructions](https://dev.fitbit.com/getting-started/) as specified in the getting started guide, then run the following command.  Note: I do not have a folder with the entire watchface, as specified in the guide.
+Perform the [general install instructions](https://dev.fitbit.com/getting-started/) as specified in the getting started guide, then run the following command. Note: I do not have a folder with the entire watchface, as specified in the guide.
 
     npm install .
 
 ### Generate Fonts
 
-The following are 2 example commands for generating fitfont images.  note, the second (with the cat command) only works on linux.
+The following are 2 example commands for generating fitfont images. note, the second (with the cat command) only works on linux.
 
     npx fitfont-generate ..\fonts\repetition-scrolling\repet___.ttf 120 █1234567890.k-
     npx fitfont-generate ..\fonts\repetition-scrolling\repet___.ttf 50 $(cat chars.txt)
@@ -152,13 +159,14 @@ To crispen the images, reducing them to purely black/white, run the following co
 
 ### Setup for Sideloading
 
-Before sideloading, please note the 2 following sections of `package.json` which appear to be necessary for said sideloading. 
+Before sideloading, please note the 2 following sections of `package.json` which appear to be necessary for said sideloading.
 
 ```json
 "enableProposedAPI": true
 ```
+
 ```json
-"dependencies": { 
+"dependencies": {
   "yarn": "^1.22.19",
   "fitfont": "^1.3.3",
   "@fitbit/sdk": "~7.1.0-pre.0",
@@ -169,25 +177,27 @@ Before sideloading, please note the 2 following sections of `package.json` which
 
 `sideload.sh` should accomplish the following:
 
-1. recursively delete `package-lock.json`, `yarn.lock`, `app/`, `build/`, `companion/`, `node_modules/`, `resources/`, and `settings/`.
-2. recursively copy `app/`, `companion/`, `resources/`, and `settings/` into destination.
-3. cd destination
-4. run the following commands:
+1.  recursively delete `package-lock.json`, `yarn.lock`, `app/`, `build/`, `companion/`, `node_modules/`, `resources/`, and `settings/`.
+2.  recursively copy `app/`, `companion/`, `resources/`, and `settings/` into destination.
+3.  cd destination
+4.  run the following commands:
 
         yarn install
         yarn build
         export FITBIT_QA_COMMANDS=1
         yarn debug
 
-5. manually run the following commands on the `fitbt$` prompt:
+5.  manually run the following commands on the `fitbt$` prompt:
 
         hosts
         connect phone
         connect device
         build-and-install
 
+## Changelog
 
-
-
-
-
+| Version | date       | JIRA cards                             | Description                             |
+| ------- | ---------- | -------------------------------------- | --------------------------------------- |
+| 0.1.0   | 2023-07-01 | ??                                     | more advanced version ready to sidelaod |
+| 0.1.1   | 2023-07-02 | n/a                                    | changes to get sideloading working      |
+| 0.1.2   | 2023-07-03 | COD-28, COD-29, COD-30, COD-31, COD-32 | bugfixes found during sideloading       |
