@@ -61,3 +61,7 @@ function stop() {
     clearInterval(watchID);
     watchID = null;
 }
+
+
+// exports.initialize = initialize();
+// exports.heartRate = heartRate;
