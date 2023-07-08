@@ -161,6 +161,10 @@ Perform the [general install instructions](https://dev.fitbit.com/getting-starte
 
     npm install .
 
+### NPM links
+
+**TODO**
+
 ### Generate Fonts
 
 The following are 2 example commands for generating fitfont images. note, the second (with the cat command) only works on linux.
