@@ -14,6 +14,9 @@ const allChars = "\"!#$%&'()*+,-./1234567890:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\
 const asciiExtended = " !\"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ"
 const requestOffset = parseInt(Math.random() * 11);
 let glitchStr = "";
+let tickerIdx = 0;
+let tickerText;
+
 
 export function getCompText(compType, tickEvent) {
     let compText = String("");
@@ -57,6 +60,11 @@ export function getCompText(compType, tickEvent) {
         // altitude
         case "8":
             compText = generateAltStr(tickEvent);
+            break;
+
+        // ticker
+        case "9":
+            compText = generateTickerStr();
             break;
 
         // glitch (default)
@@ -469,4 +477,40 @@ function generateAltStr(tickEvent) {
     }
 
     return String(convAlt);
+}
+
+
+function generateTickerStr() {
+    let fetchText, fmtText, first, remaining;
+    if (tickerIdx === 0 || tickerText === undefined) {
+        // TODO: have a configurable space replacement?
+        console.log('fetching ticker string');
+        fetchText = simpleSettings.getSettingsVal('tickerText')
+
+        // handle the fetchText not being defined
+        if (!fetchText) {
+            return "TICKR"
+        } else {
+            tickerText = String("……………" + fetchText).split(" ").join("…");
+        }
+    }
+
+
+    // the text to be displayed 
+    fmtText = tickerText.substring(0, 5);
+
+    // rotate the string for next time
+    first = tickerText.substring(0, 1);
+    remaining = tickerText.substring(1);
+    tickerText = String(remaining + first);
+
+    // incriment, or restart
+    if (tickerIdx === tickerText.length) {
+        tickerIdx = 0;
+    } else {
+        tickerIdx++;
+    }
+
+    // display the string
+    return fmtText
 }

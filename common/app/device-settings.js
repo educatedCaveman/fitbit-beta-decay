@@ -11,7 +11,7 @@ const defaults = {
     "dateFmt": "1",
     "modelFmt": "3",
     "colorText": "gold",
-    "opacityTextBackground": 35,
+    "opacityTextBackground": 50,
     "colorTextBackground": "fb-extra-dark-gray",
     "colorBackground": "black",
     "colorLabel": "lightgray",
@@ -25,7 +25,8 @@ const defaults = {
     "customTextBackground": "fb-extra-dark-gray",
     "customBackground": "black",
     "customText": "gold",
-    "customLabel":"lightgray",
+    "customLabel": "lightgray",
+    "tickerText": "",
 };
 
 export function initialize(callback) {
@@ -42,7 +43,7 @@ messaging.peerSocket.addEventListener("message", function (evt) {
         settings = defaults;
     } else if (evt.data === undefined) {
         return;
-    } else {}
+    } else { }
 
     settings[evt.data.key] = evt.data.value;
     onsettingschange(settings);
@@ -73,13 +74,18 @@ function saveSettings() {
 
 export function getSettingsVal(settingsKey) {
     try {
-        if (typeof(settings[settingsKey]) === "boolean") {
+        if (typeof (settings[settingsKey]) === "boolean") {
             return settings[settingsKey];
         } else if (settings[settingsKey] === undefined) {
             return;
         } else {
-            // settings.settingsKey should not be a boolean, and should not be undefined
-            return settings[settingsKey].values[0].value;
+            // for some reason the textinput setting is like {"name":"fuck u"}
+            // where most others are like {"values":[{"name":"Ticker","value":"9"}],"selected":[8]}
+            if (settings[settingsKey].values === undefined) {
+                return settings[settingsKey].name;
+            } else {
+                return settings[settingsKey].values[0].value;
+            }
         }
     } catch (ex) {
         // do nothing?

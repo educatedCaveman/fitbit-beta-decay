@@ -69,6 +69,7 @@ function mySettings(props) {
             { name: "Goal Progress", value: "6" },
             { name: "Weather", value: "7" },
             { name: "Altitude", value: "8" },
+            { name: "Ticker", value: "9" },
             { name: "None", value: "99" }
           ]}
           onSelection={(selection) => props.settingsStorage.setItem('complication', selection.values[0].value)}
@@ -153,6 +154,16 @@ function mySettings(props) {
               { name: "3 hours", value: "3" }
             ]}
             onSelection={(selection) => props.settingsStorage.setItem('weatherInterval', selection.values[0].value)}
+          />
+        }
+        {/* Show/Hide the extra options for the Ticker Complication */}
+        {(JSON.parse(props.settingsStorage.getItem('complication') ?? JSON.stringify(dummy))).values[0].value === "9" &&
+          <TextInput
+            label="Ticker Text"
+            settingsKey="tickerText"
+            placeholder="Ticker Text"
+            onChange={(customize) => props.settingsStorage.setItem('tickerText', JSON.stringify(customize))}
+            // onChange={(customize) => console.log(JSON.stringify(customize))}
           />
         }
       </Section>

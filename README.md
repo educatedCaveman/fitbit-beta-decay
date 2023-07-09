@@ -13,6 +13,7 @@
     - [Main Goal Progress](#main-goal-progress)
     - [Weather](#weather)
     - [Altitude](#altitude)
+    - [Ticker](#ticker)
 - [Background](#background)
 - [Licensing](#licensing)
 - [Developer Stuff](#developer-stuff)
@@ -105,6 +106,12 @@ Just the local temperature, in your preferred units.
 The altitude, in preferred units, using the barometric equation.  This uses the current pressure and the outside temperature to calculate the value.  This should not be considered especially accurate.
 
 ![altitude](screenshots/altitude.png)
+
+### Ticker
+
+A newsticker-style complication with custom text input.  Due to the limitations of the fitfont generation, I can't generate a space character.  So, any spaces in the text are replaced with elipsis (`…`).
+
+![ticker](screenshots/ticker.png)
 
 # Background
 
