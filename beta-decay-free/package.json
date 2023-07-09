@@ -8,7 +8,7 @@
     "@fitbit/sdk-cli": "^1.7.3"
   },
   "fitbit": {
-    "appUUID": "c918a7ed-0fcb-4ed8-b589-8f3c91ed55f5",
+    "appUUID": "724e11fe-5298-4907-ae84-7ec7c2f372c0",
     "appType": "clockface",
     "appDisplayName": "beta-decay-free",
     "iconFile": "resources/icon.png",

@@ -1,6 +1,6 @@
 import document from "document";
 import * as drawText from "../../common/app/draw-text.js"
-import * as nonClock from "../../common/app/clock.js"
+import * as nonClock from "./clock.js"
 import * as heartRateMon from "../../common/app/hrm.js"
 
 
