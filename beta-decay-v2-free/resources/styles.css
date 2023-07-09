@@ -1,0 +1,60 @@
+/* COLORS */
+#foreground {
+  fill: gold;
+}
+
+#background {
+  fill: black;
+}
+
+#text_bg {
+  fill: fb-extra-dark-gray;
+}
+
+#step_bg {
+  x: 333;
+  y: 50%;
+}
+
+#step_fg {
+  x: 333;
+  y: 50%;
+}
+
+#batt_bg {
+  x: 308;
+  y: 20%;
+}
+
+#batt_fg {
+  x: 308;
+  y: 20%;
+}
+
+#heart_bg {
+  x: 267;
+  y: 85%;
+}
+
+#heart_fg {
+  x: 267;
+  y: 85%;
+}
+
+#comp_bg {
+  x: 50%;
+  y: 20%;
+}
+
+#comp_fg {
+  x: 50%;
+  y: 20%;
+}
+
+#label {
+  x: 50%;
+  y: 6%;
+  fill: lightgray;
+  text-anchor: middle;
+  font-size: 20;
+}
