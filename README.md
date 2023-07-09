@@ -125,6 +125,8 @@ I currntly intend to add a payment gate to this code. However, if you're reading
 
 To the best of my knowledge, all external resources (e.g. fonts) permit commercial use.
 
+https://kiezelpay.com/account/documentation_fitbit_sdk5_dynamic_gui
+
 # Developer Stuff
 
 ## Names
@@ -233,3 +235,6 @@ Before sideloading, please note the 2 following sections of `package.json` which
 | 0.4.0   | 2023-07-04 | COD-19                                 | goal progress complication                      |
 | 0.5.0   | 2023-07-04 | COD-15                                 | weather (temperature) complication              |
 | 0.6.0   | 2023-07-04 | COD-14                                 | altitude complication                           |
+| 0.6.1   | 2023-07-04 | COD-36                                 | factor out common functionality folder          |
+| 0.7.0   | 2023-07-04 | COD-37                                 | newsticker                                      |
+| 0.8.0   | 2023-07-04 | COD-21                                 | Integrate payment                               |

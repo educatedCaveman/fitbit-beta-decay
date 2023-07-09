@@ -1,6 +1,6 @@
 {
   "name": "beta-decay-legacy",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "private": true,
   "license": "MIT",
   "devDependencies": {
@@ -16,14 +16,18 @@
     "requestedPermissions": [
       "access_activity",
       "access_heart_rate",
-      "access_location"
+      "access_location",
+      "access_app_cluster_storage",
+      "access_internet"
     ],
     "buildTargets": [
       "atlas",
       "vulcan"
     ],
     "i18n": {},
-    "defaultLanguage": "en-US"
+    "defaultLanguage": "en-US",
+    "appClusterID": "betadecay",
+    "developerID": "d5abaefb-c26c-40be-a32d-582b9a3c3667"
   },
   "scripts": {
     "build": "fitbit-build",

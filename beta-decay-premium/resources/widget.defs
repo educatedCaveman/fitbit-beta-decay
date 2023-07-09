@@ -4,5 +4,7 @@
     <link rel="import" href="/mnt/sysassets/system_widget.defs" />
     <!-- import FitFont ui file -->
     <link rel="import" href="fitfont.gui" />
+    <!-- IMPORT KPAY UI CODE -->
+    <link rel="import" href="kpay/kpay.view" />
   </defs>
 </svg>
