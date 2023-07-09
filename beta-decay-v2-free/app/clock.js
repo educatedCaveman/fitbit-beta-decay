@@ -1,8 +1,6 @@
 import clock from "clock";
 import { battery } from "power";
-// import * as complication from "./complications";
 import * as steps from "./steps";
-// import * as simpleSettings from "./device-settings";
 
 let clockCallback;
 let glitchStr = "";
