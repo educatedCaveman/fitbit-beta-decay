@@ -1,6 +1,6 @@
 {
   "name": "beta-decay",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "private": true,
   "license": "MIT",
   "devDependencies": {
@@ -30,7 +30,6 @@
     "debug": "fitbit"
   },
   "dependencies": {
-    "fitfont": "^1.3.3",
-    "beta-decay-common": "file:../common"
+    "fitfont": "^1.3.3"
   }
 }

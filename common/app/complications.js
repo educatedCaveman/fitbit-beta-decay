@@ -2,7 +2,6 @@ import { preferences } from "user-settings";
 import * as utils from "./utils";
 import * as simpleSettings from "./device-settings";
 import { me as device } from "device";
-// import { geolocation } from "geolocation";
 import * as location from "./device-location";
 import { me as appbit } from "appbit";
 import { today, goals, primaryGoal } from "user-activity";

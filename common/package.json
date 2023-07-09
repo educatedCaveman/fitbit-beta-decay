@@ -1,6 +1,12 @@
 {
-    "name": "beta-decay-common",
-    "version": "0.6.1",
-    "private": true,
-    "license": "MIT"
+  "name": "beta-decay-common",
+  "version": "0.6.1",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "fitfont": "^1.3.3",
+    "@fitbit/sdk": "~6.1.0",
+    "@fitbit/sdk-cli": "^1.7.3"
+  }
 }

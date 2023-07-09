@@ -1,6 +1,6 @@
 import * as messaging from "messaging";
 import { geolocation } from "geolocation";
-import * as utils from "../../beta-decay-v2/app/utils";
+import * as utils from "../app/utils"
 
 var ENDPOINT = "https://api.sunrisesunset.io/json?";
 

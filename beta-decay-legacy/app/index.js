@@ -1,22 +1,8 @@
 import document from "document";
-// import * as drawText from "./draw-text"
-// import * as nonClock from "./clock"
-// import * as heartRateMon from "./hrm"
-// import * as simpleSettings from "./device-settings";
-
-const drawText = require("../../common/app/draw-text")
-const nonClock = require("../../common/app/clock")
-const heartRateMon = require("../../common/app/hrm")
-const simpleSettings = require("../../common/app/device-settings")
-
-// import * as drawText from ""
-// import * as nonClock from "../../common/app/clock"
-// import * as heartRateMon from "../../common/app/hrm"
-// import * as simpleSettings from "../../common/app/device-settings"
-
-// import * as drawText from "beta-decay-common/app/draw-text"
-
-
+import * as drawText from "../../common/app/draw-text"
+import * as nonClock from "../../common/app/clock"
+import * as heartRateMon from "../../common/app/hrm"
+import * as simpleSettings from "../../common/app/device-settings"
 
 /* --------- Document/UI elements ---------- */
 let background = document.getElementById("background");

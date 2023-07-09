@@ -62,6 +62,3 @@ function stop() {
     watchID = null;
 }
 
-
-// exports.initialize = initialize();
-// exports.heartRate = heartRate;
