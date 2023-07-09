@@ -22,13 +22,18 @@
       "rhea"
     ],
     "i18n": {},
-    "defaultLanguage": "en-US"
+    "defaultLanguage": "en-US",
+    "enableProposedAPI": true
   },
   "scripts": {
     "build": "fitbit-build",
     "debug": "fitbit"
   },
   "dependencies": {
-    "fitfont": "^1.3.3"
+    "yarn": "^1.22.19",
+    "fitfont": "^1.3.3",
+    "@fitbit/sdk": "~7.1.0-pre.0",
+    "@fitbit/sdk-cli": "~1.8.0-pre.10",
+    "@fitbit/sdk-build-targets": "cmengler/fitbit-sdk-build-targets"
   }
 }
