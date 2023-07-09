@@ -27,4 +27,3 @@ replay_pid*
 # node
 node_modules/
 build/
-*package-lock.json

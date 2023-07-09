@@ -157,9 +157,13 @@ my local settings path is `C:\Users\drake\AppData\Roaming\Fitbit OS Simulator\vu
 
 ## Setup
 
-Perform the [general install instructions](https://dev.fitbit.com/getting-started/) as specified in the getting started guide, then run the following command. Note: I do not have a folder with the entire watchface, as specified in the guide.
+Perform the [general install instructions](https://dev.fitbit.com/getting-started/) as specified in the getting started guide, then run the following command in the specified folders. Note: I do not have a folder with the entire watchface, as specified in the guide.
 
     npm install .
+
+ - `common/`
+ - `beta-decay-legacy`
+ - `beta-decay-v2`
 
 ### Generate Fonts
 

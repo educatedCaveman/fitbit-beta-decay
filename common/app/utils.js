@@ -70,3 +70,4 @@ export function tickToMins(tick, delay) {
     const totalmins = hours * 60 + mins - delay;
     return totalmins;
 }
+
