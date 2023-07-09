@@ -17,6 +17,7 @@
       "access_activity",
       "access_heart_rate",
       "access_location",
+      "access_app_cluster_storage",
       "access_internet"
     ],
     "buildTargets": [
@@ -25,7 +26,9 @@
     ],
     "i18n": {},
     "defaultLanguage": "en-US",
-    "enableProposedAPI": true
+    "enableProposedAPI": true,
+    "appClusterID": "betadecay.v2",
+    "developerID": "d5abaefb-c26c-40be-a32d-582b9a3c3667"
   },
   "scripts": {
     "build": "fitbit-build",

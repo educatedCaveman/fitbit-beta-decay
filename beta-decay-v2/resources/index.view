@@ -1,38 +1,38 @@
 <svg>
-  <rect width="100%" height="100%" id="background"/>
+  <rect width="100%" height="100%" id="background" />
 
   <text id="label">β-decay</text>
 
   <!-- BACKGROUNDS -->
-  <svg id="text_bg">    
+  <svg id="text_bg">
     <!-- STEPS BACKGROUND -->
     <use href="#fitfont" id="step_bg">
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
     </use>
     <!-- BATTERY BACKGROUND -->
     <use href="#fitfont" id="batt_bg">
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
     </use>
     <!-- HEART RATE BACKGROUND -->
     <use href="#fitfont" id="heart_bg">
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
     </use>
     <!-- COMPLICATION BACKGROUND -->
     <use href="#fitfont" id="comp_bg">
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
     </use>
   </svg>
 
@@ -40,32 +40,34 @@
   <svg id="foreground">
     <!-- STEPS FOREGROUND -->
     <use href="#fitfont" id="step_fg">
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
     </use>
     <!-- BATTERY FOREGROUND -->
     <use href="#fitfont" id="batt_fg">
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
     </use>
     <!-- HEART RATE FOREGROUND -->
     <use href="#fitfont" id="heart_fg">
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
     </use>
     <!-- COMPLICATION FOREGROUND -->
     <use href="#fitfont" id="comp_fg">
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
-      <use href="#fitfont-char"/>
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
+      <use href="#fitfont-char" />
     </use>
   </svg>
+  <!-- USE KPAY UI CODE - ADD ALL OWN UI CODE ABOVE THIS LINE -->
+  <use href="#kpay" />
 </svg>
