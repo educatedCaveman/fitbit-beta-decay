@@ -239,4 +239,4 @@ Before sideloading, please note the 2 following sections of `package.json` which
 | 0.7.0   | 2023-07-04 | COD-37                                 | newsticker                                      |
 | 0.8.0   | 2023-07-04 | COD-21                                 | Integrate payment                               |
 | 1.0.0   | 2023-07-04 | n/a                                    | re-build and publish                            |
-| 1.0.1   | 2023-07-04 | n/a                                    | re-build and publish without test mode                            |
+| 1.0.1   | 2023-07-04 | n/a                                    | re-build and publish without test mode          |
