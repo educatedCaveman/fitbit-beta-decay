@@ -1,6 +1,6 @@
 {
   "name": "beta-decay-legacy",
-  "version": "0.8.0",
+  "version": "1.0.1",
   "private": true,
   "license": "MIT",
   "devDependencies": {
