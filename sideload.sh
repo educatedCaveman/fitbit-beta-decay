@@ -16,20 +16,20 @@ TO_CLEAN=(\
 TO_COPY=('app' 'companion' 'resources' 'settings')
 
 # remove files or folders
-for x in ${TO_CLEAN[@]}
+for x in "${TO_CLEAN[@]}"
 do
-     rm -rf "${DEST}/${x}"
+     rm -rf "${DEST:?}/${x}"
 done
 
 # copy over files
-for d in ${TO_COPY[@]}
+for d in "${TO_COPY[@]}"
 do
     cp -R "${SRC}/${d}" "${DEST}"
 done
 
 # ls -lrt $DEST
 
-cd "${DEST}"
+cd "${DEST}" || exit
 
 yarn install
 yarn build
